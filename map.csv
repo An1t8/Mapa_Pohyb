@@ -1,0 +1,26 @@
+Station,Eucastarship,Colverde,Luminara,Rosetta,Crystalia,Lavatron,Aquarix,Solaria,Glacius,Verdania,Mysterra
+Eucastarship,Station,Colverde,Luminara,Rosetta,Crystalia,Lavatron,Aquarix,Solaria,Glacius,Verdania,Mysterra
+Colverde,Station,Eucastarship,Luminara,Rosetta,Crystalia,Lavatron,Aquarix,Solaria,Glacius,Verdania,Mysterra
+Luminara,Station,Eucastarship,Colverde,Rosetta,Crystalia,Lavatron,Aquarix,Solaria,Glacius,Verdania,Mysterra
+Rosetta,Station,Eucastarship,Colverde,Luminara,Crystalia,Lavatron,Aquarix,Solaria,Glacius,Verdania,Mysterra
+Crystalia,Station,Eucastarship,Colverde,Luminara,Rosetta,Lavatron,Aquarix,Solaria,Glacius,Verdania,Mysterra
+Lavatron,Station,Eucastarship,Colverde,Luminara,Rosetta,Crystalia,Aquarix,Solaria,Glacius,Verdania,Mysterra
+Aquarix,Station,Eucastarship,Colverde,Luminara,Rosetta,Crystalia,Lavatron,Solaria,Glacius,Verdania,Mysterra
+Solaria,Station,Eucastarship,Colverde,Luminara,Rosetta,Crystalia,Lavatron,Aquarix,Glacius,Verdania,Mysterra
+Glacius,Station,Eucastarship,Colverde,Luminara,Rosetta,Crystalia,Lavatron,Aquarix,Solaria,Verdania,Mysterra
+Verdania,Station,Eucastarship,Colverde,Luminara,Rosetta,Crystalia,Lavatron,Aquarix,Solaria,Glacius,Mysterra
+Mysterra,Station,Eucastarship,Colverde,Luminara,Rosetta,Crystalia,Lavatron,Aquarix,Solaria,Glacius,Verdania
+
+
+Station - The main station where your space journey begins.
+Eucastarship - A spaceship ready for exploration.
+Colverde - A green planet full of vegetation and oxygen.
+Luminara - A glowing planet filled with light sources.
+Rosetta - A planet with pink rocks and a strange atmosphere.
+Crystalia - A planet covered in icy crystals.
+Lavatron - A hot planet with active volcanoes.
+Aquarix - A water world with endless oceans.
+Solaria - A sun-scorched desert planet.
+Glacius - An icy planet with extremely low temperatures.
+Verdania - A planet covered in dense forests and exotic creatures.
+Mysterra - A mysterious planet shrouded in mist and secrets.
