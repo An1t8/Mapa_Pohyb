@@ -13,7 +13,7 @@ public class Location {
             currentPlanet = currentPlanet.connections.get(destination);
             System.out.println("Moved to " + currentPlanet.name);
         } else {
-            System.out.println("You cant go there.");
+            System.out.println("You cant travel there.");
         }
     }
 
