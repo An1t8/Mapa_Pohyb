@@ -30,6 +30,7 @@ public class Astrokoala {
             return true;
         } else {
             System.out.println("❗Some crystals are still missing or misplaced.");
+
             return false;
         }
     }

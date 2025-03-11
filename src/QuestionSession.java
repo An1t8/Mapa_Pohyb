@@ -1,16 +1,20 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class QuestionSession {
 
     private GalacticSailor galacticSailor;
-    private PlanetGateKeeper gatekeeper;
+    private PlanetGateKeeper pgk;
     private int currentQuestionIndex = 0;
     private boolean sessionCompleted = false;
+    private List<Question> questions;
 
 
-    public QuestionSession(GalacticSailor galacticSailor, PlanetGateKeeper gatekeeper) {
-        this.galacticSailor = galacticSailor;
-        this.gatekeeper = gatekeeper;
+
+    public QuestionSession(PlanetGateKeeper pgk) {
+        this.questions = pgk.getQuestions();
+        this.pgk = pgk;
+        this.currentQuestionIndex = 0;
     }
 
     public void startSession() {
@@ -19,18 +23,30 @@ public class QuestionSession {
     }
 
     public Question getCurrentQuestion() {
-       return null;
+        if (currentQuestionIndex < pgk.getQuestions().size()) {
+            return pgk.getQuestions().get(currentQuestionIndex);
+        }
+        return null;
     }
 
     public boolean submitAnswer(String answer) {
-        return true;
+        Question currentQuestion = getCurrentQuestion();
+        if (currentQuestion != null) {
+            if (pgk.checkAnswer(currentQuestion, answer)) {
+                currentQuestionIndex++;
+                if (currentQuestionIndex >= pgk.getQuestions().size()) {
+                    sessionCompleted = true;
+                }
+                return true;
+            }
+        }
+        return false;
+
     }
 
     public boolean isSessionCompleted() {
-        return true;
+        return sessionCompleted || (pgk.getQuestions() != null && currentQuestionIndex >= pgk.getQuestions().size());
     }
-
-
 
 
 }

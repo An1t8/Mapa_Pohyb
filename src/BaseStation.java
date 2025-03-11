@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class BaseStation {
 
@@ -11,7 +12,6 @@ public class BaseStation {
     public void placeCrystal(Crystal crystal) {
         if (crystal != null) {
             placedCrystals.add(crystal);
-            System.out.println("You placed a " + crystal.getName() + " crystal at the base station.");
         }
     }
 
@@ -34,5 +34,8 @@ public class BaseStation {
        return "";
     }
 
+    public List<Crystal> getPlacedCrystals() {
+        return placedCrystals;
+    }
 
 }

@@ -1,6 +1,10 @@
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class GameConsole {
@@ -18,6 +22,11 @@ public class GameConsole {
     private Comet comet;
     private GalacticSailor galacticSailor;
     private PlanetGateKeeper pgk;
+    private Prompter prompter;
+    private QuestionSession questionSession;
+    private HashMap<String, List<Question>> planetQuestionsMap = new HashMap<>();
+    private QuestionsControler questionsControler;
+
 
 
 
@@ -33,50 +42,56 @@ public class GameConsole {
         astroKoala = new Astrokoala(baseStation);
         comet = new Comet();
 
+
+        galacticSailor = new GalacticSailor(crystalBag, baseStation, playerLocation, astroKoala, bigBang, comet, pgk);
+        QuestionsControler questionsControler = new QuestionsControler(galacticSailor, crystalBag);
+
         commands = new HashMap<>();
-        commands.put("fly", new FlyCommand(playerLocation));
+        commands.put("fly", new FlyCommand(playerLocation, questionsControler, universe));
         commands.put("talk", new TalkCommand(galacticSailor, pgk));
-        commands.put("take", new TakeCrystal(crystalBag, pgk));
+        commands.put("take", new TakeCrystal(crystalBag, galacticSailor));
         commands.put("position", new PositionCrystal(crystalBag, baseStation));
         commands.put("help", new Help());
         commands.put("leave", new Exit());
         commands.put("hint", new HintCommand(astroKoala));
-        commands.put("check", new CheckCrystals(astroKoala));
+        commands.put("check", new CheckCrystals(astroKoala, galacticSailor, baseStation));
         commands.put("rules", new RulesCommand(astroKoala));
         commands.put("bigbang", new BigBang());
         commands.put("comet", comet);
+        commands.put("prompter", prompter);
     }
 
     private void showIntro() {
         System.out.println("\nWelcome to the Space Adventure Game! 🚀");
         System.out.println("You are currently on " + playerLocation.getCurrentLocation());
-        System.out.println("\n📍 **Available Planets:**");
+        System.out.println("\n\uD83C\uDF0D Available Planets:");
         System.out.println("""
-                - Station  → The main station where your space journey begins.
-                - Colverde → A green planet full of vegetation and oxygen.
-                - Luminara → A glowing planet filled with light sources.
-                - Rosetta  → A planet with pink rocks and a strange atmosphere.
-                - Crystalia → A planet covered in icy crystals.
-                - Lavatron  → A hot planet with active volcanoes.
-                - Aquarix  → A water world with endless oceans.
-                - Solaria  → A sun-scorched desert planet.
-                - Glacius  → An icy planet with extremely low temperatures.
-                - Verdania → A planet covered in dense forests and exotic creatures.
-                - Mysterra → A mysterious planet shrouded in mist and secrets.
+                - Station    - The main station where your space journey begins.
+                - Colverde   - A green planet full of vegetation and oxygen.
+                - Luminara   - A glowing planet filled with light sources.
+                - Rosetta    - A planet with pink rocks and a strange atmosphere.
+                - Crystalia  - A planet covered in icy crystals.
+                - Lavatron   - A hot planet with active volcanoes.
+                - Aquarix    - A water world with endless oceans.
+                - Solaria    - A sun-scorched desert planet.
+                - Glacius    - An icy planet with extremely low temperatures.
+                - Verdania   - A planet covered in dense forests and exotic creatures.
+                - Mysterra   - A mysterious planet shrouded in mist and secrets.
                 """);
-        System.out.println("\n⌨️ **Available Commands:**");
+        System.out.println("\n Available Commands:");
         System.out.println("""
                 - fly [planet]      → Travel to a new planet.
                 - talk              → Interact with someone on the planet.
                 - take              → Collect a crystal from the environment.
                 - position          → Place a collected crystal at the base station.
-                - hint              -> Astrokoala gives you a random hint of the game.
-                - check             -> Astrokoala checks if the crystals are placed correctly.
-                - rules             -> Astrokoala reminds you of the game rules.
+                - hint              → Astrokoala gives you a random hint of the game.
+                - check             → Astrokoala checks if the crystals are placed correctly plus displays which crystals are in your bag or at the BaseStation.
+                - rules             → Astrokoala reminds you of the game rules.
                 - help              → Show available commands.
                 - leave             → Exit the game.
                 - bigbang           → Trigger the Big Bang event when two comets are ready.
-                - comet             → shows all infos about the comets.
+                - comet             → Show all informations about the comets.
+                - prompter          → Show hints for when you dont know the answer.
                 """);
         System.out.println("Type a command to begin your adventure!\n");
     }
@@ -92,13 +107,18 @@ public class GameConsole {
 
         if (commands.containsKey(commandKey)) {
             Command command = commands.get(commandKey);
-            command.setCommand(argument);
+            if (command instanceof FlyCommand) {
+                ((FlyCommand) command).setDestination(argument); // Set the destination for FlyCommand
+            } else {
+                command.setCommand(argument);
+            }
             System.out.println(" " + command.execute());
             exit = command.exit();
         } else {
             System.out.println(">> Invalid command");
         }
     }
+
 
     public void start() {
         initialize();
@@ -112,6 +132,7 @@ public class GameConsole {
             System.out.println(e.getMessage());
         }
     }
+
 
     private void logCommand(String command) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(commandLogFile, true))) {

@@ -1,0 +1,48 @@
+
+//Welcome to Colverde, the green planet full of vegetation and oxygen. If you wish to take one of our crystals you have to answer all my questions correctly
+Welcome to Colverde
+What is the process of plants making food from sunlight called?|Photosynthesis
+
+
+//Welcome to Luminara, the yellow glowing planet filled with light sources. If you wish to take one of our crystals you have to answer all my questions correctly
+Welcome to Luminara
+Which planet has the biggest rings?|Saturn
+
+//Welcome to Rosetta! A planet with pink rocks and a dreamy atmosphere. If you wish to take one of our crystals you have to answer all my questions correctly.
+Welcome to Rosetta
+What is the hardest natural substance?|Diamond
+What's the name of a stunning mineral and is a purple variety of quartz?|Amethyst
+
+Crystalia - A planet covered in icy crystals.
+Which continent is mostly covered in ice?|Antarctica
+What is the name for a large mass of ice floating in the ocean?|Iceberg
+
+Lavatron
+Welcome to Lavatron! A hot planet with active volcanoes. If you wish to take one of our crystals you have to answer all my questions correctly
+Which planet is known as the Red Planet?|Mars
+What is molten rock that reaches Earth's surface called?|Lava
+
+Aquarix
+Welcome to Acquarix, A water world with endless oceans. If you wish to take one of our crystals you have to answer all my questions correctly
+What is the largest ocean on Earth?|Pacific
+What is the smallest ocean on Earth?|Arctic
+What is the chemical formula of water?|H2O
+
+Solaria
+Welcome to Solaria, A sun-scorched desert planet.If you wish to take one of our crystals you have to answer all my questions correctly
+What's the largest planet in the Solar System?|Jupiter
+Which planet is closest to the Sun?|Mercury
+
+Glacius
+Welcome to Glacius, An icy planet with extremely low temperatures. If you wish to take one of our crystals you have to answer all my questions correctly
+What is water in its solid form called?|Ice
+
+Verdania
+Welcome to Verdania, A planet covered in dense forests and exotic creatures. If you wish to take one of our crystals you have to answer all my questions correctly
+What is the highest mountain in the world?|Mount Everest
+What shiny black rock is used in jewelry?|Obsidian
+
+Mysterra
+Welcome to Mysterra, a mysterious planet shrouded in mist and secrets. If you wish to take one of our crystals you have to answer all my questions correctly
+Which planet is called the "Evening Star"|Venus
+What is the name of our galaxy?|Milky Way

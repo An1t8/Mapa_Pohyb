@@ -1,49 +1,51 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class PlanetGateKeeper {
 
-    private String planetName;
-    private int difficutlyLevel;
-    private boolean isFriendly;
-    private ArrayList<Question> questions;
+    private String name;
+    //private int difficulty;
+    private List<Question> questions;
+    private boolean crystalTaken = false;
 
-    public PlanetGateKeeper(String planetName, int difficutlyLevel, boolean isFriendly, ArrayList<Question> questions) {
-        this.planetName = planetName;
-        this.difficutlyLevel = difficutlyLevel;
-        this.isFriendly = isFriendly;
+    public PlanetGateKeeper(String name,  List<Question> questions) {
+        this.name = name;
         this.questions = questions;
     }
 
 
-    public void greetPlayer(GalacticSailor player){
-
-    }
-
-
-    public boolean checkAnswer(String answer) {
-        return false;
-    }
 
     public String getName() {
-        return planetName;
+        return name;
     }
 
-    public boolean isFriendly() {
-        return isFriendly;
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
+
+    public String greetPlayer(GalacticSailor player) {
+        return "Welcome to " + name + "! If you wish to take one of our crystals, you must answer all my questions correctly.";
+    }
+
+    public boolean checkAnswer(Question question, String answer) {
+        return question.isCorrect(answer);
     }
 
     public boolean canTakeCrystal() {
-        return questions.isEmpty();
+        return !crystalTaken;
     }
-
-    public boolean askQuestion(String answer) {
-        return answer.equalsIgnoreCase("correct");
-    }
-
 
     public Crystal allowCrystalTake() {
-        Crystal crystal = new Crystal("");
-        return crystal;
+        if (!crystalTaken) {
+            crystalTaken = true;
+            return new Crystal(name + " Crystal");
+        }
+        return null;
     }
 
 

@@ -12,7 +12,7 @@ public class Question {
     public Question(String questionText, String correctAnswer, List<String> hints) {
         this.questionText = questionText;
         this.correctAnswer = correctAnswer;
-        this.hints = hints;
+        this.hints = hints != null ? hints : new ArrayList<>();
         this.wasHintUsed = false;
     }
 

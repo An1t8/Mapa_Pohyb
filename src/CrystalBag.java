@@ -11,7 +11,7 @@ public class CrystalBag {
     public void addCrystal(Crystal crystal) {
         if (crystal != null) {
             crystals.add(crystal);
-            System.out.println("You have collected a " + crystal.getName() + " crystal.");
+            //System.out.println("You have collected a " + crystal.getName() + " crystal.");
         }
     }
 

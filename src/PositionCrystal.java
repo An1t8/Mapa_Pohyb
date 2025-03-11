@@ -16,7 +16,7 @@ public class PositionCrystal extends Command {
 
         Crystal crystal = crystalBag.removeCrystal();
         baseStation.placeCrystal(crystal);
-        return "You have placed the crystal" + crystal.getName() + ", at the base station.";
+        return "You have placed the crystal: " + crystal.getName() + ", at the base station.";
     }
 
     @Override

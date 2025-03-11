@@ -1,23 +1,62 @@
 public class FlyCommand extends Command{
 
 
-    private Location location;
+    private Location playerLocation;
     private String destination;
+    private Universe universe;
+    private QuestionsControler questionsControler;
+    private GalacticSailor player;
 
-    public FlyCommand(Location location) {
-        this.location = location;
+
+    public FlyCommand(Location playerLocation, QuestionsControler questionsControler, Universe universe) {
+        this.playerLocation = playerLocation;
+        this.questionsControler = questionsControler;
+        this.universe = universe;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public QuestionsControler getQuestionsControler() {
+        return questionsControler;
     }
 
 
     @Override
     public String execute() {
-        if (super.command == null || super.command.isEmpty()) {
-            return "Please enter a destination planet.";
+        if (destination == null || destination.isEmpty()) {
+            return "Please specify a destination planet.";
         }
-        boolean success = location.move(super.command.trim());
 
-        return success ? "" : "Invalid travel command.";
+        String destinationName = destination.trim();
+        questionsControler.getGalacticSailor().setCurrentPGK(null);
+
+        System.out.println("Flying to " + destinationName + "...");
+
+        boolean success = playerLocation.move(destinationName);
+
+        if (success) {
+            String currentPlanet = playerLocation.getCurrentLocation();
+
+            if ("Station".equalsIgnoreCase(currentPlanet)) {
+                System.out.println("You are now on Station.");
+            } else {
+                System.out.println("Welcome to " + currentPlanet + "!");
+            }
+
+            PlanetGateKeeper pgk = questionsControler.getPlanetKeeper(currentPlanet);
+            if (pgk != null) {
+                questionsControler.visitPlanet(currentPlanet);
+            } else {
+                System.out.println("No PGK available on " + currentPlanet + ".");
+            }
+            return "";
+        } else {
+            return "Invalid travel command.";
+        }
     }
+
 
 
     @Override

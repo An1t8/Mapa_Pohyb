@@ -2,33 +2,39 @@ import java.util.List;
 
 public class Prompter extends Command {
 
-    private QuestionSession crSession;
+    private GalacticSailor player;
 
-    public Prompter(QuestionSession Session) {
-        this.crSession = Session;
-
+    public Prompter(GalacticSailor player) {
+        this.player = player;
     }
-
 
     @Override
     public String execute() {
-        if (crSession != null && !crSession.isSessionCompleted()) {
-            Question currentQuestion = crSession.getCurrentQuestion();
-
-            if (currentQuestion != null) {
-                List<String> hints = currentQuestion.getHints();
-
-
-                if (!hints.isEmpty()) {
-                    StringBuilder hintsMessage = new StringBuilder("Hints for the question:\n");
-                    for (int i = 0; i < hints.size(); i++) {
-                        hintsMessage.append((i + 1)).append(". ").append(hints.get(i)).append("\n");
-                    }
-                    return hintsMessage.toString();
-                }
-            }
+        PlanetGateKeeper pgk = player.getCurrentPGK();
+        if (pgk == null) {
+            return "There are no questions to help with on this planet.";
         }
-        return "No hints available";
+
+        QuestionSession session = player.getCurrentSession();
+        if (session == null || session.isSessionCompleted()) {
+            return "No active questions to provide hints for.";
+        }
+
+        Question currentQuestion = session.getCurrentQuestion();
+        if (currentQuestion == null) {
+            return "No questions available at the moment.";
+        }
+        String questionText = currentQuestion.getQuestionText();
+        String correctAnswer = currentQuestion.getCorrectAnswer();
+
+        StringBuilder hints = new StringBuilder("Hints for the current question:\n");
+        hints.append("1. Think about ").append(questionText.split(" ")[0]).append("...\n");
+
+        hints.append("2. The answer has ").append(correctAnswer.length()).append(" characters.\n");
+
+        hints.append("3. The answer starts with the letter '").append(correctAnswer.charAt(0)).append("'.\n");
+
+        return hints.toString();
     }
 
     @Override
