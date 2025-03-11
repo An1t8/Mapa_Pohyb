@@ -1,4 +1,6 @@
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Planet {
 
@@ -6,6 +8,8 @@ public class Planet {
 
 
      HashMap<String, Planet> connections;
+
+     private Map<Question, List<String>> questions = new HashMap<>();
 
     public Planet(String name) {
         this.name = name;
@@ -29,6 +33,14 @@ public class Planet {
 
     public boolean canTravel(String direction) {
         return connections.containsKey(direction);
+    }
+
+    public Map<Question, List<String>> getQuestions() {
+        return questions;
+    }
+
+    public void addQuestion(Question question, List<String> hints) {
+        this.questions.put(question, hints);
     }
 
 }
