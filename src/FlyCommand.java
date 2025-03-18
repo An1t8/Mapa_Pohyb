@@ -30,31 +30,37 @@ public class FlyCommand extends Command{
         }
 
         String destinationName = destination.trim();
-        questionsControler.getGalacticSailor().setCurrentPGK(null);
+        //questionsControler.getGalacticSailor().setCurrentPGK(null);
 
-        System.out.println("Flying to " + destinationName + "...");
-
-        boolean success = playerLocation.move(destinationName);
-
-        if (success) {
-            String currentPlanet = playerLocation.getCurrentLocation();
-
-            if ("Station".equalsIgnoreCase(currentPlanet)) {
-                System.out.println("You are now on Station.");
-            } else {
-                System.out.println("Welcome to " + currentPlanet + "!");
-            }
-
-            PlanetGateKeeper pgk = questionsControler.getPlanetKeeper(currentPlanet);
-            if (pgk != null) {
-                questionsControler.visitPlanet(currentPlanet);
-            } else {
-                System.out.println("No PGK available on " + currentPlanet + ".");
-            }
-            return "";
-        } else {
-            return "Invalid travel command.";
+        if(destination.equalsIgnoreCase(playerLocation.getCurrentLocation())){
+            System.out.println("You are already on a " + playerLocation.getCurrentLocation() + ".");
         }
+         else {
+            System.out.println("Flying to " + destinationName + "...");
+
+            boolean success = playerLocation.move(destinationName);
+
+            if (success) {
+                String currentPlanet = playerLocation.getCurrentLocation();
+
+                if ("Station".equalsIgnoreCase(currentPlanet)) {
+                    System.out.println("You are now on Station.");
+                } else {
+                    System.out.println("Welcome to " + currentPlanet + "!");
+                }
+
+                PlanetGateKeeper pgk = questionsControler.getPlanetKeeper(currentPlanet);
+                if (pgk != null) {
+                    questionsControler.visitPlanet(currentPlanet);
+                } else {
+                    System.out.println("No PGK available on " + currentPlanet + ".");
+                }
+
+            } else {
+                return "Invalid travel command.";
+            }
+        }
+         return "";
     }
 
 
