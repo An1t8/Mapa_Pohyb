@@ -10,6 +10,7 @@ public class GalacticSailor {
     private Comet comet;
     private PlanetGateKeeper pgk;
     private QuestionSession currentSession;
+    private Prompter prompter;
 
 
     public GalacticSailor(CrystalBag crystalBag, BaseStation baseStation, Location playerLocation, Astrokoala astroKoala, BigBang bigBang, Comet comet, PlanetGateKeeper pgk) {
@@ -20,6 +21,7 @@ public class GalacticSailor {
         this.bigBang = bigBang;
         this.comet = comet;
         this.pgk = pgk;
+        this.prompter = new Prompter(this);
     }
 
 
@@ -32,8 +34,19 @@ public class GalacticSailor {
         this.currentSession = null;
     }
 
+    public String usePrompter() {
+        if (prompter == null) {
+            return "Prompter is not available.";
+        }
+        return prompter.getHint();
+    }
+
     public QuestionSession getCurrentSession() {
         return currentSession;
+    }
+
+    public Prompter getPrompter() {
+        return prompter;
     }
 
     public void setCurrentSession(QuestionSession session) {

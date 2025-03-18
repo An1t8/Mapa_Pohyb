@@ -1,4 +1,3 @@
-import java.util.List;
 
 public class Prompter extends Command {
 
@@ -8,12 +7,16 @@ public class Prompter extends Command {
         this.player = player;
     }
 
+    public String getHint() {
+        return execute();
+    }
     @Override
     public String execute() {
         PlanetGateKeeper pgk = player.getCurrentPGK();
         if (pgk == null) {
             return "There are no questions to help with on this planet.";
         }
+
 
         QuestionSession session = player.getCurrentSession();
         if (session == null || session.isSessionCompleted()) {
@@ -24,15 +27,14 @@ public class Prompter extends Command {
         if (currentQuestion == null) {
             return "No questions available at the moment.";
         }
+
         String questionText = currentQuestion.getQuestionText();
         String correctAnswer = currentQuestion.getCorrectAnswer();
 
         StringBuilder hints = new StringBuilder("Hints for the current question:\n");
-        hints.append("1. Think about ").append(questionText.split(" ")[0]).append("...\n");
-
-        hints.append("2. The answer has ").append(correctAnswer.length()).append(" characters.\n");
-
-        hints.append("3. The answer starts with the letter '").append(correctAnswer.charAt(0)).append("'.\n");
+        //hints.append("1. Think about ").append(questionText.split(" ")[0]).append("...\n");
+        hints.append("1. The answer has ").append(correctAnswer.length()).append(" characters.\n");
+        hints.append("2. The answer starts with the letter '").append(correctAnswer.charAt(0)).append("'.\n");
 
         return hints.toString();
     }

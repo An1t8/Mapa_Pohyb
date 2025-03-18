@@ -1,4 +1,4 @@
-public class FlyCommand extends Command{
+public class FlyCommand extends Command {
 
 
     private Location playerLocation;
@@ -32,10 +32,9 @@ public class FlyCommand extends Command{
         String destinationName = destination.trim();
         //questionsControler.getGalacticSailor().setCurrentPGK(null);
 
-        if(destination.equalsIgnoreCase(playerLocation.getCurrentLocation())){
+        if (destination.equalsIgnoreCase(playerLocation.getCurrentLocation())) {
             System.out.println("You are already on a " + playerLocation.getCurrentLocation() + ".");
-        }
-         else {
+        } else {
             System.out.println("Flying to " + destinationName + "...");
 
             boolean success = playerLocation.move(destinationName);
@@ -46,7 +45,7 @@ public class FlyCommand extends Command{
                 if ("Station".equalsIgnoreCase(currentPlanet)) {
                     System.out.println("You are now on Station.");
                 } else {
-                    System.out.println("Welcome to " + currentPlanet + "!");
+                    System.out.println("Welcome to " + currentPlanet + "! If you wish to take one of our crystals, you must answer all my questions correctly.");
                 }
 
                 PlanetGateKeeper pgk = questionsControler.getPlanetKeeper(currentPlanet);
@@ -60,10 +59,8 @@ public class FlyCommand extends Command{
                 return "Invalid travel command.";
             }
         }
-         return "";
+        return "";
     }
-
-
 
     @Override
     public boolean exit() {

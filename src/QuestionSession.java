@@ -8,13 +8,14 @@ public class QuestionSession {
     private int currentQuestionIndex = 0;
     private boolean sessionCompleted = false;
     private List<Question> questions;
-
+    private Prompter prompter;
 
 
     public QuestionSession(PlanetGateKeeper pgk) {
         this.questions = pgk.getQuestions();
         this.pgk = pgk;
         this.currentQuestionIndex = 0;
+        this.prompter = new Prompter(galacticSailor);
     }
 
     public void startSession() {
@@ -40,6 +41,7 @@ public class QuestionSession {
                 return true;
             }
         }
+
         return false;
 
     }

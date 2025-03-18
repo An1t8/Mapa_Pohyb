@@ -10,7 +10,7 @@ public class Help extends Command{
                 - take              → Collect a crystal from the environment.
                 - position          → Place a collected crystal at the base station.
                 - hint              → Astrokoala gives you a random hint of the game.
-                - check             → Astrokoala checks if the crystals are placed correctly.
+                - check             → Astrokoala checks if the crystals are placed correctly plus displays which crystals are in your bag or at the BaseStation.
                 - rules             → Astrokoala reminds you of the game rules.
                 - help              → Show available commands.
                 - leave             → Exit the game.

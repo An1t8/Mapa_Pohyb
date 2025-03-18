@@ -32,13 +32,13 @@ public class QuestionsControler {
 
                 if (line.startsWith("Welcome to")) {
                     if (currentPlanetName != null && !questions.isEmpty()) {
-                        PlanetGateKeeper keeper = new PlanetGateKeeper(currentPlanetName,  new ArrayList<>(questions));
+                        PlanetGateKeeper keeper = new PlanetGateKeeper(currentPlanetName, new ArrayList<>(questions));
                         planetKeepers.put(currentPlanetName, keeper);
                         questions.clear();
                     }
                     String[] parts = line.split(" ");
                     if (parts.length >= 3) {
-                        currentPlanetName = parts[2].replace(",", "");
+                        currentPlanetName = parts[2].replace(",", "").replace("!", "");
                     }
                 } else if (line.contains("|")) {
                     String[] parts = line.split("\\|");
@@ -50,7 +50,7 @@ public class QuestionsControler {
                 }
             }
             if (currentPlanetName != null && !questions.isEmpty()) {
-                PlanetGateKeeper keeper = new PlanetGateKeeper(currentPlanetName,  new ArrayList<>(questions));
+                PlanetGateKeeper keeper = new PlanetGateKeeper(currentPlanetName, new ArrayList<>(questions));
                 planetKeepers.put(currentPlanetName, keeper);
             }
         } catch (IOException e) {
@@ -72,7 +72,6 @@ public class QuestionsControler {
         }
 
         galacticSailor.setCurrentPGK(selectedPlanet);
-        selectedPlanet.greetPlayer(galacticSailor);
 
         System.out.println("To answer questions, use the 'talk' command.");
         System.out.println("If you need help with an answer, try using the 'prompter' command.");

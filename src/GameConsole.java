@@ -41,9 +41,9 @@ public class GameConsole {
         playerLocation = new Location(startPlanet);
         astroKoala = new Astrokoala(baseStation);
         comet = new Comet();
-
-
         galacticSailor = new GalacticSailor(crystalBag, baseStation, playerLocation, astroKoala, bigBang, comet, pgk);
+        prompter = galacticSailor.getPrompter();
+
         QuestionsControler questionsControler = new QuestionsControler(galacticSailor, crystalBag);
 
         commands = new HashMap<>();
