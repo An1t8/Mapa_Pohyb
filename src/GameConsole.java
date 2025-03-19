@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -18,7 +17,7 @@ public class GameConsole {
     private Universe universe = new Universe();
     private Location playerLocation;
     private Astrokoala astroKoala;
-    private BigBang bigBang = new BigBang();
+    private BigBang bigBang;
     private Comet comet;
     private GalacticSailor galacticSailor;
     private PlanetGateKeeper pgk;
@@ -26,6 +25,8 @@ public class GameConsole {
     private QuestionSession questionSession;
     private HashMap<String, List<Question>> planetQuestionsMap = new HashMap<>();
     private QuestionsControler questionsControler;
+    private ShowCrystals show;
+    private RulesCommand rules;
 
 
 
@@ -39,31 +40,51 @@ public class GameConsole {
             return;
         }
         playerLocation = new Location(startPlanet);
-        astroKoala = new Astrokoala(baseStation);
-        comet = new Comet();
+        crystalBag = new CrystalBag();
+        baseStation = new BaseStation();
+        comet = new Comet(baseStation);
+        rules = new RulesCommand();
+
+        astroKoala = new Astrokoala(baseStation, comet);
+        bigBang = new BigBang(comet);
         galacticSailor = new GalacticSailor(crystalBag, baseStation, playerLocation, astroKoala, bigBang, comet, pgk);
         prompter = galacticSailor.getPrompter();
+        show = new ShowCrystals(galacticSailor, baseStation);
+        questionsControler = new QuestionsControler(galacticSailor, crystalBag);
 
         QuestionsControler questionsControler = new QuestionsControler(galacticSailor, crystalBag);
 
         commands = new HashMap<>();
-        commands.put("fly", new FlyCommand(playerLocation, questionsControler, universe));
+        commands.put("fly", new FlyCommand(playerLocation, questionsControler, universe, pgk, baseStation));
         commands.put("talk", new TalkCommand(galacticSailor, pgk));
         commands.put("take", new TakeCrystal(crystalBag, galacticSailor));
-        commands.put("position", new PositionCrystal(crystalBag, baseStation));
+        commands.put("position", new PositionCrystal(crystalBag, baseStation, galacticSailor));
         commands.put("help", new Help());
         commands.put("leave", new Exit());
         commands.put("hint", new HintCommand(astroKoala));
-        commands.put("check", new CheckCrystals(astroKoala, galacticSailor, baseStation));
-        commands.put("rules", new RulesCommand(astroKoala));
-        commands.put("bigbang", new BigBang());
+        commands.put("check", new CheckCrystals(astroKoala, galacticSailor, baseStation, comet));
+        commands.put("rules", new RulesCommand());
+        commands.put("bigbang", bigBang);
         commands.put("comet", comet);
         commands.put("prompter", prompter);
+        commands.put("show", show);
+        commands.put("cometplan", new CometPlan(comet));
     }
 
     private void showIntro() {
-        System.out.println("\nWelcome to the Space Adventure Game! 🚀");
-        System.out.println("You are currently on " + playerLocation.getCurrentLocation());
+        System.out.println("\nWelcome to the Space Adventure Game called The Beginning! 🚀");
+        System.out.println("\n--------------- .\uD81A\uDD54 \uD83E\uDE90˖ Game Rules - The Beginning: .\uD81A\uDD54 \uD83E\uDE90˖ --------------------------\n" +
+                "\nTravel between planets using the command 'fly [planet name]'.\n" +
+                "Answer the gatekeepers questions correctly to collect a crystal. If you dont know the answer try using 'prompter'.\n" +
+                "Bring the crystals to the base station and place them using 'position'.\n" +
+                "Arrange two stacks of 5 crystals correctly.\n" +
+                "You can always use 'cometPlan' to see your crystals arrangement in your comets!\n"+
+                "Use 'comet' and then type in the the name of the crystal to add crystal to the comet.\n" +
+                "Activate 'bigbang' and witness the Big Bang!\n" +
+                "You can always use 'help' to see available commands and planets you can travel to.");
+
+
+        System.out.println("\nYou are currently on " + playerLocation.getCurrentLocation());
         System.out.println("\n\uD83C\uDF0D Available Planets:");
         System.out.println("""
                 - Station    - The main station where your space journey begins.
@@ -85,13 +106,16 @@ public class GameConsole {
                 - take              → Collect a crystal from the environment.
                 - position          → Place a collected crystal at the base station.
                 - hint              → Astrokoala gives you a random hint of the game.
-                - check             → Astrokoala checks if the crystals are placed correctly plus displays which crystals are in your bag or at the BaseStation.
-                - rules             → Astrokoala reminds you of the game rules.
-                - help              → Show available commands.
+                - check             → Astrokoala checks if the crystals are placed correctly plus displays are at the BaseStation.
+                                      You can use this ONLY when youre at the base station since Astrokoala doesnt travel with you.
+                - rules             → Display game rules. Use this whenever you feel lost!
+                - show              → Displays the crystals in your crystal bag and at the base station. You can use this whenever you want.
+                - help              → Show available commands and planets.
                 - leave             → Exit the game.
                 - bigbang           → Trigger the Big Bang event when two comets are ready.
                 - comet             → Show all informations about the comets.
                 - prompter          → Show hints for when you dont know the answer.
+                - cometplan         → Displays comet crystal distribution.
                 """);
         System.out.println("Type a command to begin your adventure!\n");
     }
@@ -108,7 +132,7 @@ public class GameConsole {
         if (commands.containsKey(commandKey)) {
             Command command = commands.get(commandKey);
             if (command instanceof FlyCommand) {
-                ((FlyCommand) command).setDestination(argument); // Set the destination for FlyCommand
+                ((FlyCommand) command).setDestination(argument);
             } else {
                 command.setCommand(argument);
             }
@@ -118,7 +142,6 @@ public class GameConsole {
             System.out.println(">> Invalid command");
         }
     }
-
 
     public void start() {
         initialize();

@@ -11,5 +11,10 @@ public class Crystal {
         return name;
     }
 
-
+    @Override
+    public String toString() {
+        return "Crystal{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

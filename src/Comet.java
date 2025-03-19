@@ -1,79 +1,90 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 
 public class Comet extends Command {
 
-        private List<Crystal> crystals;
-        private static final int REQUIRED_CRYSTALS = 5;
+    private static final int REQUIRED_CRYSTALS = 5;
+    private List<Crystal> comet1;
+    private List<Crystal> comet2;
+    private BaseStation baseStation;
 
-        public Comet() {
-            this.crystals = new ArrayList<>();
-        }
+    public Comet(BaseStation baseStation) {
+        this.baseStation = baseStation;
+        this.comet1 = new ArrayList<>();
+        this.comet2 = new ArrayList<>();
+    }
 
-        public void addCrystal(Crystal crystal) {
-            if (crystal != null && crystals.size() < REQUIRED_CRYSTALS) {
-                crystals.add(crystal);
-                System.out.println("Crystal " + crystal.getName() + " has been added to the comet.");
-            } else if (crystals.size() >= REQUIRED_CRYSTALS) {
-                System.out.println("The comet already has the required number of crystals.");
-            } else {
-                System.out.println("Invalid crystal!");
+    public List<Crystal> getCrystals(int cometNumber) {
+        return (cometNumber == 1) ? comet1 : comet2;
+    }
+
+    public String addCrystal(String crystalName) {
+        List<Crystal> placedCrystals = baseStation.getPlacedCrystals();
+        Crystal selectedCrystal = null;
+
+        for (Crystal crystal : placedCrystals) {
+            if (crystal.getName().equalsIgnoreCase(crystalName)) {
+                selectedCrystal = crystal;
+                break;
             }
         }
 
-        public boolean isComplete() {
-            return crystals.size() == REQUIRED_CRYSTALS;
+        if (selectedCrystal == null) {
+            return "Crystal '" + crystalName + "' not found at the base station.";
         }
 
-        public void showCrystals() {
-            if (crystals.isEmpty()) {
-                System.out.println("The comet is empty.");
-            } else {
-                System.out.println("The comet contains the following crystals:");
-                for (Crystal c : crystals) {
-                    System.out.println("- " + c.getName());
-                }
+        if (comet1.size() < REQUIRED_CRYSTALS) {
+            comet1.add(selectedCrystal);
+        } else if (comet2.size() < REQUIRED_CRYSTALS) {
+            comet2.add(selectedCrystal);
+        } else {
+            return "Both comets are already full!";
+        }
+
+        placedCrystals.remove(selectedCrystal);
+        return "Crystal '" + crystalName + "' has been added to a comet.";
+    }
+
+    public boolean areBothCometsFull() {
+        return comet1.size() == REQUIRED_CRYSTALS && comet2.size() == REQUIRED_CRYSTALS;
+    }
+
+
+
+    public void showComets() {
+        System.out.println("🌠 Comet crystal distribution:");
+
+        System.out.println("\n Comet 1:");
+        if (comet1.isEmpty()) {
+            System.out.println("   - Empty");
+        } else {
+            for (Crystal c : comet1) {
+                System.out.println("   - " + c.getName());
             }
         }
 
-        public void clear() {
-            crystals.clear();
-            System.out.println("The comet has been cleared.");
-        }
-
-        public void removeLastCrystal() {
-            if (!crystals.isEmpty()) {
-                Crystal removed = crystals.remove(crystals.size() - 1);
-                System.out.println("Crystal " + removed.getName() + " has been removed from the comet.");
-            } else {
-                System.out.println("The comet is already empty.");
+        System.out.println("\n Comet 2:");
+        if (comet2.isEmpty()) {
+            System.out.println("   - Empty");
+        } else {
+            for (Crystal c : comet2) {
+                System.out.println("   - " + c.getName());
             }
         }
+        System.out.println("\nuse 'comet' to add crystals to the comet." );
+    }
 
-        public int getCrystalCount() {
-            return crystals.size();
-        }
+    @Override
+    public String execute() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter crystal name: ");
+        return addCrystal(scanner.nextLine());
+    }
 
-
-        @Override
-        public String execute() {
-
-            if (crystals.isEmpty()) {
-                return "The comet is empty.";
-            } else {
-                StringBuilder sb = new StringBuilder();
-                sb.append("The comet contains the following crystals:\n");
-                for (Crystal c : crystals) {
-                    sb.append("- ").append(c.getName()).append("\n");
-                }
-                return sb.toString();
-            }
-        }
-
-        @Override
-        public boolean exit() {
-            return false;
-        }
-
+    @Override
+    public boolean exit() {
+        return false;
+    }
 }

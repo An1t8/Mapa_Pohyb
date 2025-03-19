@@ -32,7 +32,6 @@ public class Prompter extends Command {
         String correctAnswer = currentQuestion.getCorrectAnswer();
 
         StringBuilder hints = new StringBuilder("Hints for the current question:\n");
-        //hints.append("1. Think about ").append(questionText.split(" ")[0]).append("...\n");
         hints.append("1. The answer has ").append(correctAnswer.length()).append(" characters.\n");
         hints.append("2. The answer starts with the letter '").append(correctAnswer.charAt(0)).append("'.\n");
 

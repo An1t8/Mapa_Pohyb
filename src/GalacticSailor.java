@@ -11,6 +11,7 @@ public class GalacticSailor {
     private PlanetGateKeeper pgk;
     private QuestionSession currentSession;
     private Prompter prompter;
+    private ShowCrystals showCrystals;
 
 
     public GalacticSailor(CrystalBag crystalBag, BaseStation baseStation, Location playerLocation, Astrokoala astroKoala, BigBang bigBang, Comet comet, PlanetGateKeeper pgk) {
@@ -73,8 +74,9 @@ public class GalacticSailor {
         return crystalBag;
     }
 
-    public void checkCrystals() {
-        crystalBag.showCrystals();
+
+    public boolean isAtBaseStation() {
+        return playerLocation.getCurrentLocation().equals("Station");
     }
 
 

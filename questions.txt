@@ -21,25 +21,29 @@ Welcome to Lavatron!
 Which planet is known as the Red Planet?|Mars
 What is molten rock that reaches Earth's surface called?|Lava
 
+
 //Aquarix - A water world with endless oceans. If you wish to take one of our crystals you have to answer all my questions correctly
-Welcome to Acquarix!
+Welcome to Aquarix!
 What is the largest ocean on Earth?|Pacific
-What is the smallest ocean on Earth?|Arctic
 What is the chemical formula of water?|H2O
+
 
 //Solaria - A sun-scorched desert planet.If you wish to take one of our crystals you have to answer all my questions correctly
 Welcome to Solaria!
 What's the largest planet in the Solar System?|Jupiter
 Which planet is closest to the Sun?|Mercury
 
+
 //Glacius - An icy planet with extremely low temperatures. If you wish to take one of our crystals you have to answer all my questions correctly
 Welcome to Glacius!
 What is water in its solid form called?|Ice
+
 
 //Verdania - A planet covered in dense forests and exotic creatures. If you wish to take one of our crystals you have to answer all my questions correctly
 Welcome to Verdania!
 What is the highest mountain in the world?|Mount Everest
 What shiny black rock is used in jewelry?|Obsidian
+
 
 //Mysterra -  A mysterious planet shrouded in mist and secrets. If you wish to take one of our crystals you have to answer all my questions correctly
 Welcome to Mysterra!

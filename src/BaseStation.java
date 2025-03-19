@@ -15,23 +15,8 @@ public class BaseStation {
         }
     }
 
-    public boolean isComplete() {
-        return placedCrystals.size() >= 10;
-    }
-
-    public void showPlacedCrystals() {
-        if (placedCrystals.isEmpty()) {
-            System.out.println("No crystals have been placed yet.");
-        } else {
-            System.out.println("Crystals at the base station:");
-            for (Crystal c : placedCrystals) {
-                System.out.println("- " + c.getName());
-            }
-        }
-    }
-
-    public String createBigBang() {
-       return "";
+    public void text() {
+        System.out.println("\nYou are now on Station. Use 'position' to place all crystals from your crystalBag on the base station. \nYour friend, Astrokoala is here, when you think your comets are ready use 'check' and Astrokoala will check if you have all the crystals!");
     }
 
     public List<Crystal> getPlacedCrystals() {

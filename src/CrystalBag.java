@@ -11,7 +11,6 @@ public class CrystalBag {
     public void addCrystal(Crystal crystal) {
         if (crystal != null) {
             crystals.add(crystal);
-            //System.out.println("You have collected a " + crystal.getName() + " crystal.");
         }
     }
 
@@ -26,14 +25,8 @@ public class CrystalBag {
         return crystals.isEmpty();
     }
 
-    public void showCrystals() {
-        if (crystals.isEmpty()) {
-            System.out.println("Your crystal bag is empty.");
-        } else {
-            System.out.println("You have the following crystals:");
-            for (Crystal c : crystals) {
-                System.out.println("- " + c.getName());
-            }
-        }
+
+    public ArrayList<Crystal> getCrystals() {
+        return crystals;
     }
 }
