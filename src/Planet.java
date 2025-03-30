@@ -2,6 +2,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Represents a planet in the universe. Each planet can have connections to other planets,
+ */
 public class Planet {
 
     public String name;
@@ -20,28 +23,33 @@ public class Planet {
         return name;
     }
 
-    public void connect(String name, Planet planet) {
+    /**
+     * Establishes a two-way connection between this planet and another planet.
+     * name   The name of the connected planet.
+     * planet The planet to connect to.
+     */
+    /*public void connect(String name, Planet planet) {
         if (planet != null) {
             connections.put(name, planet);
             planet.connections.put(this.name, this); //oboustranne spojeni
         }
     }
 
+     */
+    public void connect(String planetName, Planet targetPlanet) {
+        connections.put(planetName.toLowerCase(), targetPlanet); // Store with lowercase planet names
+        targetPlanet.connections.put(this.name.toLowerCase(), this); // Ensure the connection is bidirectional
+    }
+
     public Planet getConnection(String direction) {
         return connections.get(direction);
     }
 
-    public boolean canTravel(String direction) {
-        return connections.containsKey(direction);
-    }
 
     public Map<Question, List<String>> getQuestions() {
         return questions;
     }
 
-    public void addQuestion(Question question, List<String> hints) {
-        this.questions.put(question, hints);
-    }
 
 }
 

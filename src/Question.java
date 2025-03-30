@@ -1,39 +1,45 @@
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * The Question class represents a question with a correct answer and optional hints.
+ */
 public class Question {
 
     private String questionText;
     private String correctAnswer;
-    private List<String> hints;
-    private boolean wasHintUsed;
 
-    public Question(String questionText, String correctAnswer, List<String> hints) {
+    public Question(String questionText, String correctAnswer) {
         this.questionText = questionText;
         this.correctAnswer = correctAnswer;
-        this.hints = hints != null ? hints : new ArrayList<>();
-        this.wasHintUsed = false;
     }
 
+
+    /**
+     * Gets the question text.
+     * @return The question text.
+     */
     public String getQuestionText(){
         return questionText;
     }
 
 
+    /**
+     * Checks if a given answer is correct.
+     * @param answer The answer to check.
+     * @return True if the answer is correct, false otherwise.
+     */
+
     public boolean isCorrect(String answer) {
         return correctAnswer.equalsIgnoreCase(answer.trim());
     }
 
-    public List<String> getHints() {
-        wasHintUsed = true;
-        return hints;
-    }
 
-    public String getFirstHint() {
-        return "";
-    }
 
+    /**
+     * Gets the correct answer to the question.
+     * @return The correct answer.
+     */
     public String getCorrectAnswer() {
         return correctAnswer;
     }

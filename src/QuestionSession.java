@@ -1,6 +1,9 @@
-import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Manages a session where the player answers questions given by a PlanetGateKeeper.
+ */
 public class QuestionSession {
 
     private GalacticSailor galacticSailor;
@@ -11,6 +14,10 @@ public class QuestionSession {
     private Prompter prompter;
 
 
+    /**
+     * Constructs a QuestionSession for a given PlanetGateKeeper.
+     * @param pgk The PlanetGateKeeper managing the questions.
+     */
     public QuestionSession(PlanetGateKeeper pgk) {
         this.questions = pgk.getQuestions();
         this.pgk = pgk;
@@ -18,17 +25,32 @@ public class QuestionSession {
         this.prompter = new Prompter(galacticSailor);
     }
 
+    /**
+     * Starts or resets the session.
+     */
     public void startSession() {
         currentQuestionIndex = 0;
         sessionCompleted = false;
     }
 
+
+    /**
+     * Retrieves the current question the player needs to answer.
+     * @return The current Question, or null if no more questions are available.
+     */
     public Question getCurrentQuestion() {
         if (currentQuestionIndex < pgk.getQuestions().size()) {
             return pgk.getQuestions().get(currentQuestionIndex);
         }
         return null;
     }
+
+
+    /**
+     * Submits an answer for the current question and advances if correct.
+     * @param answer The player's answer.
+     * @return true if the answer is correct, false otherwise.
+     */
 
     public boolean submitAnswer(String answer) {
         Question currentQuestion = getCurrentQuestion();
@@ -46,6 +68,11 @@ public class QuestionSession {
 
     }
 
+
+    /**
+     * Checks whether the question session has been completed.
+     * @return true if all questions have been answered, false otherwise.
+     */
     public boolean isSessionCompleted() {
         return sessionCompleted || (pgk.getQuestions() != null && currentQuestionIndex >= pgk.getQuestions().size());
     }

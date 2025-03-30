@@ -1,6 +1,12 @@
+/**
+ * A command that displays the game rules when executed.
+ */
 public class RulesCommand extends Command {
 
-
+    /**
+     * Executes the command to display the game rules.
+     * @return A string containing the rules of the game.
+     */
     @Override
     public String execute() {
         return """
@@ -18,6 +24,10 @@ public class RulesCommand extends Command {
 
     }
 
+    /**
+     * Determines whether the command causes the game to exit.
+     * @return False, since this command does not exit the game.
+     */
     @Override
     public boolean exit() {
         return false;

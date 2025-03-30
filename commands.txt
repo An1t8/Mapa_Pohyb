@@ -1,0 +1,23 @@
+fly colverde
+talk
+take
+fly station
+position
+show
+cometplan
+comet
+show
+fly luminara
+check
+talk
+take
+show
+fly station
+posiiton
+position
+comet
+check
+cometplan
+bigbang
+ůeave
+leave

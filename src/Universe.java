@@ -4,11 +4,19 @@ import java.util.HashMap;
 import java.io.FileReader;
 import java.io.FileNotFoundException;
 
-
+/**
+ * The Universe class manages the map of planets in the game. It loads planet data from a file and connects planets based on the data.
+ * Each planet is connected to other planets, forming a network of planets.
+ */
 class Universe {
     HashMap<String, Planet> planets = new HashMap<>();
 
 
+
+    /**
+     * Loads planet data from a file and sets up the planets and their connections.
+     * @param filename The name of the file to read planet data from.
+     */
     void loadMap(String filename) {
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
@@ -34,6 +42,11 @@ class Universe {
         }
     }
 
+    /**
+     * Retrieves a planet by its name.
+     * @param name The name of the planet to retrieve.
+     * @return The Planet object if found, otherwise prints a message and returns null.
+     */
     Planet getPlanet(String name) {
         Planet planet = planets.get(name);
         if (planet == null) {
@@ -41,4 +54,4 @@ class Universe {
         }
         return planet;
     }
-    }
+}

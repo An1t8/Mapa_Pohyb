@@ -1,18 +1,31 @@
 import java.util.Scanner;
 
+/**
+ * A command that allows the player to talk to the PGK and answer questions.
+ * The player must answer all questions correctly before they can take a crystal.
+ */
 public class TalkCommand extends Command {
 
     private GalacticSailor player;
-    private PlanetGateKeeper pgk;
-
 
     Scanner sc = new Scanner(System.in);
 
-    public TalkCommand(GalacticSailor player, PlanetGateKeeper pgk) {
+
+    /**
+     * Constructs the TalkCommand with the given GalacticSailor and PlanetGateKeeper.
+     * @param player The player attempting to talk to the PGK and answer questions.
+     */
+    public TalkCommand(GalacticSailor player) {
         this.player = player;
-        this.pgk = pgk;
     }
 
+
+    /**
+     * Executes the TalkCommand, which involves interacting with the PGK to answer questions.
+     * If the player has already answered all questions correctly, they can collect a crystal.
+     * Players can use the 'prompter' command for hints.
+     * @return A string message describing the outcome of the interaction, such as completing the questions or collecting a crystal.
+     */
     @Override
     public String execute() {
         PlanetGateKeeper pgk = player.getCurrentPGK();
@@ -22,6 +35,7 @@ public class TalkCommand extends Command {
         }
 
         QuestionSession session = player.getCurrentSession();
+
         if (session == null) {
             session = new QuestionSession(pgk);
             player.setCurrentSession(session);
