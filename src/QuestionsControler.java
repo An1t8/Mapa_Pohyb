@@ -3,6 +3,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * The QuestionsControler class manages planet gatekeepers and their questions.
+ * It loads questions from a file and assigns them to the corresponding planets.
+ */
 public class QuestionsControler {
 
     private GalacticSailor galacticSailor;
@@ -16,6 +20,10 @@ public class QuestionsControler {
         loadQuestionsFromFile("questions.txt");
     }
 
+    /**
+     * Loads questions from a file and assigns them to planet gatekeepers.
+     * @param filename The name of the file containing questions.
+     */
     private void loadQuestionsFromFile(String filename) {
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
@@ -45,7 +53,8 @@ public class QuestionsControler {
                     if (parts.length == 2) {
                         String questionText = parts[0].trim();
                         String correctAnswer = parts[1].trim();
-                        questions.add(new Question(questionText, correctAnswer, new ArrayList<>()));
+                        questions.add(new Question(questionText, correctAnswer//, new ArrayList<>()
+                        ));
                     }
                 }
             }
@@ -59,10 +68,21 @@ public class QuestionsControler {
         }
     }
 
+
+    /**
+     * Retrieves the PlanetGateKeeper for a given planet.
+     * @param planetName The name of the planet.
+     * @return The PlanetGateKeeper if found, otherwise null.
+     */
     public PlanetGateKeeper getPlanetKeeper(String planetName) {
         return planetKeepers.get(planetName);
     }
 
+
+    /**
+     * Allows the GalacticSailor to visit a planet and interact with its gatekeeper.
+     * @param planetName The name of the planet to visit.
+     */
     public void visitPlanet(String planetName) {
         PlanetGateKeeper selectedPlanet = planetKeepers.get(planetName);
 
@@ -77,9 +97,14 @@ public class QuestionsControler {
         System.out.println("If you need help with an answer, try using the 'prompter' command.");
     }
 
+    /**
+     * Gets the GalacticSailor associated with this controller.
+     * @return The GalacticSailor instance.
+     */
     public GalacticSailor getGalacticSailor() {
         return galacticSailor;
     }
+
 
     public void setGalacticSailor(GalacticSailor galacticSailor) {
         this.galacticSailor = galacticSailor;

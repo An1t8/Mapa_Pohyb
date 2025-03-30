@@ -1,3 +1,6 @@
+/**
+ * The Crystal class represents a crystal with a name.
+ */
 public class Crystal {
 
     private String name;

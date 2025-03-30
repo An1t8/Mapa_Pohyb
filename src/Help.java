@@ -1,4 +1,14 @@
+/**
+ * The Help class provides a list of available commands and planets the player can interact with in the game.
+ * When executed, it displays the list of commands and planets to help guide the player.
+ */
+
 public class Help extends Command{
+
+    /**
+     * Executes the help command, displaying a list of available commands and planets that the player can interact with.
+     * @return A string representation of the available commands and planets.
+     */
     @Override
     public String execute() {
 

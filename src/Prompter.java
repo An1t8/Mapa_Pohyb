@@ -1,4 +1,7 @@
-
+/**
+ * The Prompter class provides hints to the player about the current question.
+ * It extends the Command class, allowing it to be executed as a game command.
+ */
 public class Prompter extends Command {
 
     private GalacticSailor player;
@@ -7,9 +10,19 @@ public class Prompter extends Command {
         this.player = player;
     }
 
+
+    /**
+     * @return A string containing hints about the current question.
+     */
     public String getHint() {
         return execute();
     }
+
+
+    /**
+     * Executes the prompter command, generating hints for the player's current question.
+     * @return A message containing hints, or an appropriate response if no hints are available.
+     */
     @Override
     public String execute() {
         PlanetGateKeeper pgk = player.getCurrentPGK();

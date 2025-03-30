@@ -1,4 +1,7 @@
-
+/**
+ * The GalacticSailor class represents a player in the game, with various attributes and abilities related to the player's progress.
+ * It contains methods for interacting with the environment, including the current location, the crystal bag, and the interaction with the game world (e.g., using the prompter, setting current planet).
+ */
 
 public class GalacticSailor {
 
@@ -30,11 +33,18 @@ public class GalacticSailor {
         return pgk;
     }
 
+    /**
+     * Sets a new PlanetGateKeeper for the session
+     */
     public void setCurrentPGK(PlanetGateKeeper pgk) {
         this.pgk = pgk;
         this.currentSession = null;
     }
 
+    /**
+     * Uses the prompter to get a hint for the player.
+     * @return A hint from the prompter or a message if the prompter is not available.
+     */
     public String usePrompter() {
         if (prompter == null) {
             return "Prompter is not available.";
@@ -75,6 +85,10 @@ public class GalacticSailor {
     }
 
 
+    /**
+     * Checks if the player is currently at the base station.
+     * @return {@code true} if the player is at the base station, {@code false} otherwise.
+     */
     public boolean isAtBaseStation() {
         return playerLocation.getCurrentLocation().equals("Station");
     }

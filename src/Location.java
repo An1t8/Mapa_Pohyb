@@ -1,6 +1,15 @@
+/**
+ * The Location class represents the player's current location in the universe.
+ * It allows movement between connected planets.
+ */
 public class Location {
     private Planet currentPlanet;
 
+    /**
+     * Constructs a Location with the specified starting planet
+     * @param startPlanet The planet where the player starts
+     * @throws IllegalArgumentException if the start planet is null
+     */
     public Location(Planet startPlanet) {
         if (startPlanet == null) {
             throw new IllegalArgumentException("Start planet cannot be null");
@@ -10,6 +19,11 @@ public class Location {
 
 
 
+    /**
+     * Moves the player to the specified destination planet if it exists
+     * @param destination The name of the planet to move to
+     * @return {@code true} if the movement was successful, {@code false} otherwise
+     */
     public boolean move(String destination) {
         if (destination == null || destination.isEmpty()) {
             return false;

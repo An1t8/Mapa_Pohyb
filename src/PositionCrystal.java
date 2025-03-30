@@ -1,3 +1,6 @@
+/**
+ * Represents a command that allows the player to position all collected crystals at the Base Station.
+ */
 public class PositionCrystal extends Command {
 
     private CrystalBag crystalBag ;
@@ -10,6 +13,11 @@ public class PositionCrystal extends Command {
         this.player = player;
     }
 
+
+    /**
+     * Executes the command to position crystals at the base station.
+     * @return A message indicating the result of the action.
+     */
     @Override
     public String execute() {
         if (crystalBag.isEmpty()) {
@@ -29,6 +37,10 @@ public class PositionCrystal extends Command {
 
     }
 
+    /**
+     * Indicates whether this command causes the game to exit.
+     * @return {@code false}, since this command does not exit the game.
+     */
     @Override
     public boolean exit() {
         return false;

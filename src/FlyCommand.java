@@ -1,3 +1,8 @@
+/**
+ * The FlyCommand class extends command that allows the player to fly to different planets in the universe.
+ * The command requires a destination planet and moves the player to that location, interacting with the environment.
+ */
+
 public class FlyCommand extends Command {
 
 
@@ -26,6 +31,12 @@ public class FlyCommand extends Command {
     }
 
 
+    /**
+     * Executes the fly command, moving the player to the specified planet.
+     * If the player is already at the destination, no movement occurs.
+     * If successful, the player's interaction with the planet's gatekeeper is triggered.
+     * @return A message indicating the result of the flight
+     */
     @Override
     public String execute() {
         if (destination == null || destination.isEmpty()) {
@@ -42,13 +53,13 @@ public class FlyCommand extends Command {
 
             if (success) {
 
-                System.out.println("\uD83D\uDEF8 Flying to " + destinationName + "... ");
+                System.out.println("\n\uD83D\uDEF8 Flying to " + destinationName + "... ");
                 String currentPlanet = playerLocation.getCurrentLocation();
 
                 if ("Station".equalsIgnoreCase(currentPlanet)) {
                     station.text();
                 } else {
-                    System.out.println("\uD83D\uDC7D : Welcome to " + currentPlanet + "! \nIf you wish to take one of our crystals, you must answer all my questions correctly.");
+                    System.out.println("\n\uD83D\uDC7D : Welcome to " + currentPlanet + "! \nIf you wish to take one of our crystals, you must answer all my questions correctly.");
                 }
 
                 PlanetGateKeeper pgk = questionsControler.getPlanetKeeper(currentPlanet);

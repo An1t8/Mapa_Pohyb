@@ -1,0 +1,7 @@
+fly colverde
+talk
+take
+fly station
+posiiton
+position
+show

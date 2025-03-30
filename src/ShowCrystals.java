@@ -1,16 +1,30 @@
 import java.util.List;
 
+/**
+ * A command that displays the crystals the player currently holds in their bag
+ * and, if at the base station, the crystals placed there.
+ */
 public class ShowCrystals extends Command{
 
     private GalacticSailor player;
     private BaseStation baseStation;
 
 
+    /**
+     * Constructs the ShowCrystals command with the given player and base station.
+     * @param player      The player whose crystals will be displayed.
+     * @param baseStation The base station where placed crystals are stored.
+     */
     public ShowCrystals(GalacticSailor player, BaseStation baseStation) {
         this.player = player;
         this.baseStation = baseStation;
     }
 
+
+    /**
+     * Executes the command to display the player's crystals and, if applicable, the crystals placed at the base station.
+     * @return A string describing the crystals in the player's bag and at the base station.
+     */
     @Override
     public String execute() {
         StringBuilder result = new StringBuilder();
@@ -43,6 +57,10 @@ public class ShowCrystals extends Command{
         return result.toString();
     }
 
+    /**
+     * Determines whether the command causes the game to exit.
+     * @return False, since this command does not exit the game.
+     */
     @Override
     public boolean exit() {
         return false;

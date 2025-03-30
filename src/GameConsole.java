@@ -1,11 +1,14 @@
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
+
+/**
+ * The GameConsole class manages the execution of the Space Adventure Game "The Beginning".
+ * It initializes the game, handles user commands, and maintains game state.
+ */
 public class GameConsole {
     private boolean exit = false;
     private HashMap<String, Command> commands = new HashMap<>();
@@ -29,8 +32,9 @@ public class GameConsole {
     private RulesCommand rules;
 
 
-
-
+    /**
+     * Initializes the game, loads the universe map, and sets up game components.
+     */
     public void initialize() {
         universe.loadMap("map.csv");
 
@@ -56,14 +60,14 @@ public class GameConsole {
 
         commands = new HashMap<>();
         commands.put("fly", new FlyCommand(playerLocation, questionsControler, universe, pgk, baseStation));
-        commands.put("talk", new TalkCommand(galacticSailor, pgk));
+        commands.put("talk", new TalkCommand(galacticSailor));
         commands.put("take", new TakeCrystal(crystalBag, galacticSailor));
         commands.put("position", new PositionCrystal(crystalBag, baseStation, galacticSailor));
         commands.put("help", new Help());
         commands.put("leave", new Exit());
         commands.put("hint", new HintCommand(astroKoala));
         commands.put("check", new CheckCrystals(astroKoala, galacticSailor, baseStation, comet));
-        commands.put("rules", new RulesCommand());
+        commands.put("rules", rules);
         commands.put("bigbang", bigBang);
         commands.put("comet", comet);
         commands.put("prompter", prompter);
@@ -71,6 +75,9 @@ public class GameConsole {
         commands.put("cometplan", new CometPlan(comet));
     }
 
+    /**
+     * Displays the introduction and game instructions.
+     */
     private void showIntro() {
         System.out.println("\nWelcome to the Space Adventure Game called The Beginning! 🚀");
         System.out.println("\n--------------- .\uD81A\uDD54 \uD83E\uDE90˖ Game Rules - The Beginning: .\uD81A\uDD54 \uD83E\uDE90˖ --------------------------\n" +
@@ -120,6 +127,9 @@ public class GameConsole {
         System.out.println("Type a command to begin your adventure!\n");
     }
 
+    /**
+     * Reads a command from the user and executes the corresponding game action.
+     */
     private void executeCommand() {
         System.out.print(">> ");
         String input = scanner.nextLine().trim().toLowerCase();
@@ -143,6 +153,9 @@ public class GameConsole {
         }
     }
 
+    /**
+     * Reads and executes user commands in a loop until exit is triggered.
+     */
     public void start() {
         initialize();
         showIntro();
@@ -157,6 +170,10 @@ public class GameConsole {
     }
 
 
+    /**
+     * Logs executed commands to a file for tracking user actions.
+     * @param command The command entered by the user.
+     */
     private void logCommand(String command) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(commandLogFile, true))) {
             bw.write(command);
@@ -166,6 +183,9 @@ public class GameConsole {
         }
     }
 
+    /**
+     * Resets the command log file at the start of a new game session.
+     */
     private void resetCommandLog() {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(commandLogFile, false))) {
         } catch (Exception e) {
