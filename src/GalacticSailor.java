@@ -91,11 +91,7 @@ public class GalacticSailor {
      * Checks if the player is currently at the base station.
      * @return {@code true} if the player is at the base station, {@code false} otherwise.
      */
-    /*public boolean isAtBaseStation() {
-        return playerLocation.getCurrentLocation().equals("Station");
-    }
 
-     */
     public boolean isAtBaseStation() {
         return this.getPlayerLocation().getCurrentLocation().equals(baseStation.getPlanet().getName());
     }
@@ -104,9 +100,6 @@ public class GalacticSailor {
         this.playerLocation = newLocation;
     }
 
-    public String getCurrentLocation() {
-        // Assuming planet has a name like "BaseStation" or "Station"
-        return planet.getName(); // This should return the correct location name
-    }
+
 
 }

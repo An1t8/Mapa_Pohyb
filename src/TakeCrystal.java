@@ -1,5 +1,6 @@
 /**
  * A command that allows the player to take a crystal from the PlanetGateKeeper after successfully answering all the questions.
+ * The crystal is stored in the player's CrystalBag.
  */
 
 public class TakeCrystal extends Command{
