@@ -96,6 +96,10 @@ public class GalacticSailor {
         return this.getPlayerLocation().getCurrentLocation().equals(baseStation.getPlanet().getName());
     }
 
+    /**
+     * Moves the player to a new location.
+     * @param newLocation The new {@code Location} the player is moving to.
+     */
     public void moveTo(Location newLocation) {
         this.playerLocation = newLocation;
     }
