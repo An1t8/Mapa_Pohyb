@@ -2,6 +2,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class for verifying the functionality of the GalacticSailor class.
+ */
 public class GalacticSailorTest {
 
     private GalacticSailor player;
@@ -13,6 +16,9 @@ public class GalacticSailorTest {
     private PlanetGateKeeper pgk;
     private BigBang bigbang;
 
+    /**
+     * Initializes objects before each test.
+     */
     @BeforeEach
     void init() {
         Planet station = new Planet("Station");
@@ -27,6 +33,9 @@ public class GalacticSailorTest {
         player = new GalacticSailor(crystalBag, baseStation, playerLocation, astroKoala, bigbang, comet, pgk);
     }
 
+    /**
+     * Tests whether the usePrompter() method returns a valid hint.
+     */
     @Test
     void usePrompter() {
         String hint = player.usePrompter();
@@ -34,6 +43,9 @@ public class GalacticSailorTest {
         assertTrue(hint.contains("hint"));
     }
 
+    /**
+     * Tests whether the player can correctly change their location.
+     */
     @Test
     void playerMovement() {
         Location newLocation = new Location(new Planet("Colverde"));
@@ -41,6 +53,9 @@ public class GalacticSailorTest {
         assertEquals(newLocation, player.getLocation());
     }
 
+    /**
+     * Verifies that the isAtBaseStation() method correctly detects when the player is at the base station.
+     */
     @Test
     void isAtBaseStationTest() {
         Planet baseStationPlanet = baseStation.getPlanet();

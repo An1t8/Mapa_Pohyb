@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Test class for verifying the functionality of crystal collection and placement.
+ */
 public class CrystalsTest {
 
     private GalacticSailor player;
@@ -17,6 +20,10 @@ public class CrystalsTest {
     private CheckCrystals checkCrystals;
     private Crystal crystal;
 
+
+    /**
+     * Initializes objects before each test.
+     */
     @BeforeEach
     void init() {
         Planet station = new Planet("Station");
@@ -34,6 +41,9 @@ public class CrystalsTest {
         checkCrystals = new CheckCrystals(astroKoala, player, baseStation, comet);
     }
 
+    /**
+     * Tests whether crystals are correctly placed on the comet.
+     */
     @Test
     void checkCrystals() {
         CheckCrystals checkCrystals = new CheckCrystals(astroKoala, player, baseStation, comet);
@@ -70,9 +80,13 @@ public class CrystalsTest {
         assertEquals("Both comets are ready for the Big Bang!\nUse 'bigbang' to create Earth!", result);
     }
 
+    /**
+     * Tests the toString() method of the Crystal class.
+     */
     @Test
     void testToString() {
         crystal.setName("Luminara");
         assertEquals("Crystal{name='Luminara'}", crystal.toString());
     }
+
 }
