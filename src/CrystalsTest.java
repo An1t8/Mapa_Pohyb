@@ -50,17 +50,17 @@ public class CrystalsTest {
         System.out.println("Is player at base station? " + isAtBaseStation);
         assertTrue(isAtBaseStation, "Player should be at the Base Station");
 
-        baseStation.getPlacedCrystals().add(new Crystal("Ruby"));
-        baseStation.getPlacedCrystals().add(new Crystal("Emerald"));
+        baseStation.getPlacedCrystals().add(new Crystal("Rosetta"));
+        baseStation.getPlacedCrystals().add(new Crystal("Lavatron"));
 
-        System.out.println("Adding first crystal: Ruby");
-        comet.addCrystal("Ruby");
+        System.out.println("Adding first crystal: Rosetta");
+        comet.addCrystal("Rosetta");
         System.out.println("Are both comets full after first crystal? " + comet.areBothCometsFull());
 
         assertFalse(comet.areBothCometsFull(), "Comets should not be full after adding just one crystal");
 
-        System.out.println("Adding second crystal: Emerald");
-        comet.addCrystal("Emerald");
+        System.out.println("Adding second crystal: Lavatron");
+        comet.addCrystal("Lavatron");
         System.out.println("Are both comets full after second crystal? " + comet.areBothCometsFull());
 
         assertTrue(comet.areBothCometsFull(), "Comets should be full after adding two crystals");
