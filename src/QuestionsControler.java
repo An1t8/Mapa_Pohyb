@@ -32,11 +32,6 @@ public class QuestionsControler {
             List<Question> questions = new ArrayList<>();
 
             while ((line = br.readLine()) != null) {
-                if (line.startsWith("//")) {
-                    // Skip comments
-                    continue;
-                }
-
                 if (line.isEmpty()) continue; // Skip empty lines
 
                 if (line.startsWith("Welcome to")) {
@@ -54,11 +49,11 @@ public class QuestionsControler {
                     if (parts.length == 2) {
                         String questionText = parts[0].trim();
                         String correctAnswer = parts[1].trim();
-                        questions.add(new Question(questionText, correctAnswer//, new ArrayList<>()
-                        ));
+                        questions.add(new Question(questionText, correctAnswer));
                     }
                 }
             }
+
             if (currentPlanetName != null && !questions.isEmpty()) {
                 PlanetGateKeeper keeper = new PlanetGateKeeper(currentPlanetName, new ArrayList<>(questions));
                 planetKeepers.put(currentPlanetName, keeper);
@@ -68,7 +63,6 @@ public class QuestionsControler {
             e.printStackTrace();
         }
     }
-
 
     /**
      * Retrieves the PlanetGateKeeper for a given planet.

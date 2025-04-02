@@ -29,19 +29,18 @@ public class BigBang extends Command {
     @Override
     public String execute() {
         if (comet.areBothCometsFull()) {
-            createEarth();
             return "🌍 Big Bang has occurred! Congratulations you won the game the Earth has been created! \n Thank you for playing 'The Beginning'! You can now use 'leave' to exit the game.";
         }
         return "Both comets are not full yet. Add more crystals to each comet.";
     }
 
-    /**
-     *
-     */
+   /*
     private void createEarth() {
         Planet earth = new Planet("Earth");
         System.out.println("A new planet, Earth, has been created!");
     }
+
+    */
 
     /**
      * @return false, since this command does not exit the game.

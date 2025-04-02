@@ -42,7 +42,8 @@ public class CrystalsTest {
     }
 
     /**
-     * Tests whether crystals are correctly placed on the comet.
+     * Tests whether there's enough crystals in the comets
+     * plus if the player is at base station
      */
     @Test
     void checkCrystals() {
