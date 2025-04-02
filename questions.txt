@@ -13,7 +13,7 @@ Which continent is mostly covered in ice?|Antarctica
 What is the name for a large mass of ice floating in the ocean?|Iceberg
 
 Welcome to Lavatron!
-Which planet is known as the Red Planet?|Mars
+Which planet is known as the Red game.Planet?|Mars
 What is molten rock that reaches Earth's surface called?|Lava
 
 Welcome to Aquarix!
