@@ -7,6 +7,8 @@ import commands.ShowCrystals;
 import questions.QuestionSession;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * The game.GalacticSailor class represents a player in the game, with various attributes and abilities related to the player's progress.
@@ -30,36 +32,35 @@ public class GalacticSailor implements Serializable {
     private Planet planet;
 
 
-    public GalacticSailor(CrystalBag crystalBag, BaseStation baseStation, Location playerLocation, Astrokoala astroKoala, BigBang bigBang, Comet comet, PlanetGateKeeper pgk) {
-        this.crystalBag = crystalBag;
-        this.baseStation = baseStation;
-        this.playerLocation = playerLocation;
-        this.astroKoala = astroKoala;
-        this.bigBang = bigBang;
-        this.comet = comet;
-        this.pgk = pgk;
-        this.prompter = new Prompter(this);
-    }
+public GalacticSailor(CrystalBag crystalBag, BaseStation baseStation, Location playerLocation, Astrokoala astroKoala, BigBang bigBang, Comet comet, PlanetGateKeeper pgk) {
+    this.crystalBag = crystalBag;
+    this.baseStation = baseStation;
+    this.playerLocation = playerLocation;
+    this.astroKoala = astroKoala;
+    this.bigBang = bigBang;
+    this.comet = comet;
+    this.pgk = pgk;
+    this.prompter = new Prompter(this);
+}
 
 
-    private boolean gameCompleted; // Stav hry (dokonalá hra nebo ne)
+private boolean gameCompleted;
 
-    // Getter a setter pro tento atribut
-    public boolean isGameCompleted() {
-        return gameCompleted;
-    }
+public boolean isGameCompleted() {
+    return gameCompleted;
+}
 
-    public void setGameCompleted(boolean gameCompleted) {
-        this.gameCompleted = gameCompleted;
-    }
+public void setGameCompleted(boolean gameCompleted) {
+    this.gameCompleted = gameCompleted;
+}
 
-    public PlanetGateKeeper getCurrentPGK() {
-        return pgk;
-    }
+public PlanetGateKeeper getCurrentPGK() {
+    return pgk;
+}
 
-    /**
-     * Sets a new game.PlanetGateKeeper for the session
-     */
+/**
+ * Sets a new game.PlanetGateKeeper for the session
+ */
     public void setCurrentPGK(PlanetGateKeeper pgk) {
         this.pgk = pgk;
         this.currentSession = null;

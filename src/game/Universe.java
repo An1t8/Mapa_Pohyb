@@ -8,15 +8,20 @@ import java.util.HashMap;
  * Each planet is connected to other planets, forming a network of planets.
  */
 public class Universe implements Serializable {
-    HashMap<String, Planet> planets;
 
-    private HashMap<String, Boolean> takenCrystals;
+    private static final long serialVersionUID = 1L; // Add this line
 
+    public HashMap<String, Planet> planets;
+
+    HashMap<String, Boolean> takenCrystals;
 
     public Universe() {
         this.planets = new HashMap<>();
         this.takenCrystals = new HashMap<>();
+
     }
+
+
 
     /**
      * Loads planet data from a file and sets up the planets and their connections.
@@ -45,9 +50,7 @@ public class Universe implements Serializable {
         } catch (IOException e) {
             System.out.println("error: " + e);
         }
-        if (takenCrystals == null) {
-            takenCrystals = new HashMap<>();
-        }
+
     }
 
     /**
@@ -71,9 +74,13 @@ public class Universe implements Serializable {
         takenCrystals.put(crystalName, true);
     }
 
-    // Metoda pro kontrolu, jestli byl krystal již vzat
     public boolean isCrystalTaken(String crystalName) {
         return takenCrystals.getOrDefault(crystalName, false);
     }
 
+
+
+    public HashMap<String, Planet> getPlanets() {
+        return planets;
+    }
 }

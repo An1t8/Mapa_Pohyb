@@ -4,6 +4,7 @@ import game.*;
 import questions.QuestionSession;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 /**
  * A command that allows the player to take a crystal from the game.PlanetGateKeeper after successfully answering all the questions.
@@ -14,8 +15,8 @@ public class TakeCrystal extends Command implements Serializable {
     private CrystalBag crystalBag;
     private GalacticSailor player;
     private BaseStation baseStation;
-    private Universe universe; // Přidáme odkaz na Universe pro kontrolu vzatých krystalů
-
+    private Universe universe;
+    private HashMap<String, Boolean> takenCrystals;
 
 
     /**
@@ -27,8 +28,20 @@ public class TakeCrystal extends Command implements Serializable {
         this.crystalBag = crystalBag;
         this.player=  player;
         this.universe = universe;
+        this.takenCrystals = universe.getTakenCrystals(); // Initialize takenCrystals map from Universe
+
     }
 
+
+    /*public boolean isCrystalTaken(String crystalName) {
+        return takenCrystals.getOrDefault(crystalName, false);
+    }
+
+    public void markCrystalAsTaken(String crystalName) {
+        takenCrystals.put(crystalName, true);
+    }
+
+     */
 
     /**
      * Executes the command to allow the player to take a crystal from the PGK if the player has completed the necessary conditions.
@@ -69,7 +82,6 @@ public class TakeCrystal extends Command implements Serializable {
                     if (player.getBaseStation().getPlacedCrystals().contains(crystal)) {
                         return "This crystal is already on the base station.";
                     }
-                    // Kontrola, zda krystal už nebyl vzat v rámci hry
                     if (universe.isCrystalTaken(crystal.getName())) {
                         return "This crystal has already been taken from this planet.";
                     }

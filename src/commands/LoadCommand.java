@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class LoadCommand extends Command implements Serializable {
 
     private GameConsole gameConsole;
-    private String filename;
+    private static final String DEFAULT_FILENAME = "res/game.txt";
 
     public LoadCommand(GameConsole gameConsole) {
         this.gameConsole = gameConsole;
@@ -16,17 +16,15 @@ public class LoadCommand extends Command implements Serializable {
 
     @Override
     public String execute() {
-        if (gameConsole.loadGame(filename)) {
-            return "game was successfully loaded from the file " + (filename.isEmpty() ? "game.txt" : filename);
+        System.out.println(" Loading game from: " + DEFAULT_FILENAME);
+        if (gameConsole.loadGame(DEFAULT_FILENAME)) {
+            return "game loaded successfully";
         } else {
             return "Error while loading the game";
         }
     }
 
-    @Override
-    public void setCommand(String command) {
-        this.filename = command.trim();
-    }
+
 
     @Override
     public boolean exit() {

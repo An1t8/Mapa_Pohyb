@@ -34,7 +34,6 @@ public class GameConsole {
     private PlanetGateKeeper pgk;
     private Prompter prompter;
     private QuestionSession questionSession;
-    private HashMap<String, List<Question>> planetQuestionsMap = new HashMap<>();
     private QuestionsControler questionsControler;
     private ShowCrystals show;
     private RulesCommand rules;
@@ -53,6 +52,7 @@ public class GameConsole {
             System.out.println("Station not found in the universe.");
             return;
         }
+        universe = new Universe();
         playerLocation = new Location(startPlanet);
         crystalBag = new CrystalBag();
         baseStation = new BaseStation(startPlanet);
@@ -137,8 +137,8 @@ public class GameConsole {
                 - comet             → Show all informations about the comets.
                 - prompter          → Show hints for when you dont know the answer.
                 - cometplan         → Displays comet crystal distribution.
-                - save [filename]     Saves the current state of the game.
-                - load [filename]     Loads the game from the file.
+                - save              → Saves the current state of the game to the file 'game.txt'.
+                - load              → Loads the game from the file: 'game.txt'.
                 """);
         System.out.println("Type a command to begin your adventure!\n");
     }
@@ -221,18 +221,23 @@ public class GameConsole {
             filename = "res/game.txt";
         }
 
+
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
 
             GameState gameState = new GameState();
             gameState.universe = this.universe;
+
             gameState.crystalBag = this.crystalBag;
             gameState.currentPlanetName = this.playerLocation.getCurrentLocation();
             gameState.baseStation = this.baseStation;
             gameState.galacticSailor = this.galacticSailor;
             gameState.questionsControler = this.questionsControler;
             gameState.comet = this.comet;
-            gameState.gameCompleted = this.galacticSailor.isGameCompleted();  // Uložení stavu dokončení hry
-
+            gameState.gameCompleted = this.galacticSailor.isGameCompleted();
+            gameState.takenCrystals = this.universe.getTakenCrystals(); // Save taken crystals
+            gameState.planets = this.universe.planets; // Save planets
+            gameState.currentPlanetName = this.galacticSailor.getCurrentPlanetName(); // Save current planet name
+            gameState.astrokoala = this.astroKoala;
 
             oos.writeObject(gameState);
             return true;
@@ -255,28 +260,25 @@ public class GameConsole {
             filename = "res/game.txt";
         }
 
+
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
             GameState gameState = (GameState) ois.readObject();
 
-            this.universe = gameState.universe!= null ? gameState.universe : new Universe();
-            this.crystalBag = gameState.crystalBag;
+            this.universe = new Universe();
+            this.universe.loadMap("res/map.csv");
+
+            this.universe.getTakenCrystals().putAll(gameState.takenCrystals);
 
             Planet currentPlanet = this.universe.getPlanet(gameState.currentPlanetName);
-            if (currentPlanet == null) {
-                System.out.println("Planet " + gameState.currentPlanetName + " not found.");
-                return false;
-            }
             this.playerLocation = new Location(currentPlanet);
 
+            this.galacticSailor.setPlayerLocation(this.playerLocation);
+            this.crystalBag = gameState.crystalBag;
             this.baseStation = gameState.baseStation;
             this.galacticSailor = gameState.galacticSailor;
             this.galacticSailor.setPlayerLocation(this.playerLocation);
-
             this.questionsControler = gameState.questionsControler;
             this.comet = gameState.comet;
-
-            this.universe.getTakenCrystals().clear();
-            this.universe.getTakenCrystals().putAll(gameState.takenCrystals);
 
             this.astroKoala.setBaseStation(this.baseStation);
             this.astroKoala.setComet(this.comet);

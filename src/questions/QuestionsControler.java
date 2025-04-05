@@ -89,7 +89,7 @@ public class QuestionsControler implements Serializable {
         PlanetGateKeeper selectedPlanet = planetKeepers.get(planetName);
 
         if (selectedPlanet == null) {
-            System.out.println("game.Planet not found or no questions available for this planet.");
+            System.out.println("Planet not found or no questions available for this planet.");
             return;
         }
 

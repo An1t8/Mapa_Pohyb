@@ -8,7 +8,7 @@ public class SaveCommand extends Command implements Serializable {
 
 
     private GameConsole gameConsole;
-    private String filename;
+    private static final String DEFAULT_FILENAME = "res/game.txt";
 
 
     public SaveCommand(GameConsole gameConsole) {
@@ -17,18 +17,15 @@ public class SaveCommand extends Command implements Serializable {
 
     @Override
     public String execute() {
-        if (gameConsole.saveGame(filename)) {
-            return "Game was successfully saved into the file " + (filename.isEmpty() ? "game.txt" : filename);
+        System.out.println(" Saving game to: " + DEFAULT_FILENAME);
+        if (gameConsole.saveGame(DEFAULT_FILENAME)) {
+            return "Game state saved successfully.";
         } else {
-            return "Error while saving the game.";
+            return "Error saving game state.";
         }
 
     }
 
-    @Override
-    public void setCommand(String command) {
-        this.filename = command.trim();
-    }
 
     @Override
     public boolean exit() {

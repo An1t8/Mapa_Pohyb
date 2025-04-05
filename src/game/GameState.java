@@ -1,6 +1,5 @@
 package game;
 
-import commands.BigBang;
 import commands.Comet;
 import questions.QuestionsControler;
 
@@ -20,5 +19,8 @@ public class GameState implements Serializable {
     public Comet comet;
     public boolean gameCompleted;
     public HashMap<String, Boolean> takenCrystals;
+    public HashMap<String, Planet> planets;
+    public Astrokoala astrokoala;
+
 
 }
