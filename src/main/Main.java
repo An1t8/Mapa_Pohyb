@@ -15,7 +15,7 @@ public class Main {
      */
     public static void main(String[] args) {
         Universe universe = new Universe();
-        universe.loadMap("map.csv");
+        universe.loadMap("res/map.csv");
         GameConsole gc = new GameConsole();
         gc.start();
 

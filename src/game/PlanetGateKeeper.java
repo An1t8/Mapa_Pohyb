@@ -2,13 +2,14 @@ package game;
 
 import questions.Question;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Represents a gatekeeper on a planet who holds a set of questions.
  * The player must answer these questions correctly to obtain a crystal.
  */
-public class PlanetGateKeeper {
+public class PlanetGateKeeper implements Serializable {
 
     private String name;
     private List<Question> questions;
@@ -64,7 +65,7 @@ public class PlanetGateKeeper {
     public Crystal allowCrystalTake() {
         if (!crystalTaken) {
             crystalTaken = true;
-            return new Crystal(name + " game.Crystal");
+            return new Crystal(name + " Crystal");
         }
         return null;
     }

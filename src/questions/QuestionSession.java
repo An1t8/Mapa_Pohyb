@@ -4,13 +4,14 @@ import commands.Prompter;
 import game.GalacticSailor;
 import game.PlanetGateKeeper;
 
+import java.io.Serializable;
 import java.util.List;
 
 
 /**
  * Manages a session where the player answers questions given by a game.PlanetGateKeeper.
  */
-public class QuestionSession {
+public class QuestionSession implements Serializable {
 
     private GalacticSailor galacticSailor;
     private PlanetGateKeeper pgk;
@@ -24,11 +25,12 @@ public class QuestionSession {
      * Constructs a questions.QuestionSession for a given game.PlanetGateKeeper.
      * @param pgk The game.PlanetGateKeeper managing the questions.
      */
-    public QuestionSession(PlanetGateKeeper pgk) {
+    public QuestionSession(PlanetGateKeeper pgk, GalacticSailor galacticSailor) {
         this.questions = pgk.getQuestions();
         this.pgk = pgk;
         this.currentQuestionIndex = 0;
         this.prompter = new Prompter(galacticSailor);
+        this.galacticSailor = galacticSailor;
     }
 
     /**

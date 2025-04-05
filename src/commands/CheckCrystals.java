@@ -4,11 +4,13 @@ import game.Astrokoala;
 import game.BaseStation;
 import game.GalacticSailor;
 
+import java.io.Serializable;
+
 /**
  * The commands.CheckCrystals command is responsible for verifying whether the player's comets contain
  * the required crystals for the Big Bang event.
  */
-public class CheckCrystals extends Command {
+public class CheckCrystals extends Command implements Serializable {
 
 
     private Astrokoala astroKoala;

@@ -2,6 +2,7 @@ package game;
 
 import questions.Question;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,14 +10,12 @@ import java.util.Map;
 /**
  * Represents a planet in the universe. Each planet can have connections to other planets,
  */
-public class Planet {
+public class Planet implements Serializable {
 
     public String name;
+    HashMap<String, Planet> connections;
 
-
-     HashMap<String, Planet> connections;
-
-     private Map<Question, List<String>> questions = new HashMap<>();
+    private Map<Question, List<String>> questions = new HashMap<>();
 
     public Planet(String name) {
         this.name = name;

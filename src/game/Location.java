@@ -1,11 +1,18 @@
 package game;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The game.Location class represents the player's current location in the universe.
  * It allows movement between connected planets.
  */
-public class Location {
+public class Location implements Serializable {
     private Planet currentPlanet;
+
+    private List<String> takenCrystals = new ArrayList<>();
+
 
     /**
      * Constructs a game.Location with the specified starting planet
@@ -31,11 +38,7 @@ public class Location {
             return false;
         }
 
-        //String formattedDestination = destination.substring(0, 1).toUpperCase() + destination.substring(1).toLowerCase();
-
         String formattedDestination = destination.toLowerCase();
-
-        //if (formattedDestination.equals(currentPlanet.name)) {
         if (formattedDestination.equals(currentPlanet.name.toLowerCase())) {
 
             return true;
@@ -49,6 +52,11 @@ public class Location {
 
             return false;
         }
+    }
+
+
+    public List<String> getTakenCrystals() {
+        return takenCrystals;
     }
 
 

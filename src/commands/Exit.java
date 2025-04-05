@@ -1,10 +1,12 @@
 package commands;
 
+import java.io.Serializable;
+
 /**
  * The commands.Exit class represents a command that exits the game.
  * When executed, it terminates the game and returns a message to the player.
  */
-public class Exit extends Command {
+public class Exit extends Command implements Serializable {
 
     /**
      * Executes the exit command, terminating the game.

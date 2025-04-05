@@ -1,9 +1,11 @@
 package questions;
 
+import java.io.Serializable;
+
 /**
  * The questions.Question class represents a question with a correct answer and optional hints.
  */
-public class Question {
+public class Question implements Serializable {
 
     private String questionText;
     private String correctAnswer;

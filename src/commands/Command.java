@@ -1,5 +1,7 @@
 package commands;
 
+import java.io.Serializable;
+
 /**
  * The commands.Command class is an abstract class that represents a game command.
  */

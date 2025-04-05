@@ -1,19 +1,22 @@
 package game;
 
-import java.io.BufferedReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.HashMap;
-import java.io.FileReader;
-import java.io.FileNotFoundException;
 
 /**
  * The game.Universe class manages the map of planets in the game. It loads planet data from a file and connects planets based on the data.
  * Each planet is connected to other planets, forming a network of planets.
  */
-public class Universe {
-    HashMap<String, Planet> planets = new HashMap<>();
+public class Universe implements Serializable {
+    HashMap<String, Planet> planets;
+
+    private HashMap<String, Boolean> takenCrystals;
 
 
+    public Universe() {
+        this.planets = new HashMap<>();
+        this.takenCrystals = new HashMap<>();
+    }
 
     /**
      * Loads planet data from a file and sets up the planets and their connections.
@@ -42,6 +45,9 @@ public class Universe {
         } catch (IOException e) {
             System.out.println("error: " + e);
         }
+        if (takenCrystals == null) {
+            takenCrystals = new HashMap<>();
+        }
     }
 
     /**
@@ -52,8 +58,22 @@ public class Universe {
     public Planet getPlanet(String name) {
         Planet planet = planets.get(name);
         if (planet == null) {
-            System.out.println("game.Planet " + name + " not found");
+            System.out.println("Planet " + name + " not found");
         }
         return planet;
     }
+
+    public HashMap<String, Boolean> getTakenCrystals() {
+        return takenCrystals;
+    }
+
+    public void markCrystalAsTaken(String crystalName) {
+        takenCrystals.put(crystalName, true);
+    }
+
+    // Metoda pro kontrolu, jestli byl krystal již vzat
+    public boolean isCrystalTaken(String crystalName) {
+        return takenCrystals.getOrDefault(crystalName, false);
+    }
+
 }

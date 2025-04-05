@@ -2,17 +2,16 @@ package game;
 
 import commands.Comet;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Astrokoala {
-
-
+public class Astrokoala implements Serializable {
 
     private BaseStation baseStation;
     private Comet comet;
 
     /**
-     * Constructs an game.Astrokoala with a specified game.BaseStation and commands.Comet.
+     * Astrokoala with a specified game.BaseStation and commands.Comet.
      * @param baseStation The base station associated with the game.Astrokoala.
      * @param comet       The comet associated with the game.Astrokoala.
      */

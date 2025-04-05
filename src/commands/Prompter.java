@@ -5,11 +5,13 @@ import game.PlanetGateKeeper;
 import questions.Question;
 import questions.QuestionSession;
 
+import java.io.Serializable;
+
 /**
  * The commands.Prompter class provides hints to the player about the current question.
  * It extends the commands.Command class, allowing it to be executed as a game command.
  */
-public class Prompter extends Command {
+public class Prompter extends Command  implements Serializable {
 
     private GalacticSailor player;
 

@@ -1,9 +1,11 @@
 package commands;
 
+import java.io.Serializable;
+
 /**
  * The commands.CometPlan command displays the current crystal distribution in both comets.
  */
-public class CometPlan extends Command {
+public class CometPlan extends Command implements Serializable {
 
     private Comet comet;
 
@@ -14,7 +16,7 @@ public class CometPlan extends Command {
      */
     public CometPlan(Comet comet) {
         if (comet == null) {
-            throw new IllegalArgumentException("commands.Comet cant be null");
+            throw new IllegalArgumentException("Comet cant be null");
         }
         this.comet = comet;
     }

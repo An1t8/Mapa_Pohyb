@@ -35,15 +35,17 @@ public class CrystalsTest {
     void init() {
         Planet station = new Planet("Station");
 
-        crystalBag = new game.CrystalBag();
+        crystalBag = new CrystalBag();
         baseStation = new BaseStation(station);
         playerLocation = new Location(new Planet("Station"));
         astroKoala = new Astrokoala();
         comet = new Comet(baseStation);
         pgk = new PlanetGateKeeper();
-        bigbang = new BigBang(comet);
-        crystal = new game.Crystal("Colverde");
         player = new GalacticSailor(crystalBag, baseStation, playerLocation, astroKoala, bigbang, comet, pgk);
+
+        bigbang = new BigBang(comet, player);
+        crystal = new Crystal("Colverde");
+
 
         checkCrystals = new CheckCrystals(astroKoala, player, baseStation, comet);
     }
@@ -61,8 +63,8 @@ public class CrystalsTest {
 
         player.setPlayerLocation(new Location(baseStationPlanet));
 
-        System.out.println("Player game.Location: " + player.getPlayerLocation().getCurrentLocation());
-        System.out.println("Base Station game.Location: " + baseStation.getPlanet().getName());
+        System.out.println("Player Location: " + player.getPlayerLocation().getCurrentLocation());
+        System.out.println("Base Station Location: " + baseStation.getPlanet().getName());
 
         boolean isAtBaseStation = player.isAtBaseStation();
         System.out.println("Is player at base station? " + isAtBaseStation);
@@ -84,7 +86,7 @@ public class CrystalsTest {
         Assertions.assertTrue(comet.areBothCometsFull(), "Comets should be full after adding two crystals");
 
         String result = checkCrystals.execute();
-        System.out.println("commands.Command result: " + result);
+        System.out.println("Command result: " + result);
         assertEquals("Both comets are ready for the Big Bang!\nUse 'bigbang' to create Earth!", result);
     }
 

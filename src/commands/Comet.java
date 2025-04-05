@@ -3,6 +3,7 @@ package commands;
 import game.BaseStation;
 import game.Crystal;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -12,7 +13,7 @@ import java.util.Scanner;
  * Two comets are required to be filled with crystals to trigger the Big Bang.
  */
 
-public class Comet extends Command {
+public class Comet extends Command implements Serializable {
 
     private static final int REQUIRED_CRYSTALS = 1;
     private List<Crystal> comet1;
@@ -52,7 +53,7 @@ public class Comet extends Command {
         }
 
         if (selectedCrystal == null) {
-            return "game.Crystal '" + crystalName + "' not found at the base station.";
+            return "'" + crystalName + "' not found at the base station.";
         }
 
         if (comet1.size() < REQUIRED_CRYSTALS) {
@@ -64,7 +65,7 @@ public class Comet extends Command {
         }
 
         placedCrystals.remove(selectedCrystal);
-        return "game.Crystal '" + crystalName + "' has been added to a comet.";
+        return "'" + crystalName + "' has been added to a comet.";
     }
 
     /**
@@ -81,9 +82,9 @@ public class Comet extends Command {
      * Displays the current distribution of crystals in both comets.
      */
     public void showComets() {
-        System.out.println("🌠 commands.Comet crystal distribution:");
+        System.out.println("🌠 Comet crystal distribution:");
 
-        System.out.println("\n commands.Comet 1:");
+        System.out.println("\n Comet 1:");
         if (comet1.isEmpty()) {
             System.out.println("   - Empty");
         } else {
@@ -92,7 +93,7 @@ public class Comet extends Command {
             }
         }
 
-        System.out.println("\n commands.Comet 2:");
+        System.out.println("\n Comet 2:");
         if (comet2.isEmpty()) {
             System.out.println("   - Empty");
         } else {

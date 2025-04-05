@@ -1,5 +1,6 @@
 package game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  * The game.BaseStation class represents a space station where players can place
  * crystals and interact with game.Astrokoala.
  */
-public class BaseStation {
+public class BaseStation implements Serializable {
 
     private ArrayList<Crystal> placedCrystals;
     private Planet planet;

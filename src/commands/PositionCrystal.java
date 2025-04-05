@@ -5,10 +5,12 @@ import game.Crystal;
 import game.CrystalBag;
 import game.GalacticSailor;
 
+import java.io.Serializable;
+
 /**
  * Represents a command that allows the player to position all collected crystals at the Base Station.
  */
-public class PositionCrystal extends Command {
+public class PositionCrystal extends Command implements Serializable {
 
     private CrystalBag crystalBag ;
     private BaseStation baseStation;

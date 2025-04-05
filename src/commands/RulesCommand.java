@@ -1,9 +1,11 @@
 package commands;
 
+import java.io.Serializable;
+
 /**
  * A command that displays the game rules when executed.
  */
-public class RulesCommand extends Command {
+public class RulesCommand extends Command implements Serializable {
 
     /**
      * Executes the command to display the game rules.

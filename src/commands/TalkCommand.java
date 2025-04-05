@@ -5,13 +5,14 @@ import game.PlanetGateKeeper;
 import questions.Question;
 import questions.QuestionSession;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
 /**
  * A command that allows the player to talk to the PGK and answer questions.
  * The player must answer all questions correctly before they can take a crystal.
  */
-public class TalkCommand extends Command {
+public class TalkCommand extends Command implements Serializable {
 
     private GalacticSailor player;
 
@@ -44,7 +45,7 @@ public class TalkCommand extends Command {
         QuestionSession session = player.getCurrentSession();
 
         if (session == null) {
-            session = new QuestionSession(pgk);
+            session = new QuestionSession(pgk, player);
             player.setCurrentSession(session);
             session.startSession();
         }

@@ -1,12 +1,13 @@
 package game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * The game.CrystalBag class represents a collection of crystals that the player holds.
  * Crystals can be added or removed from the bag, and it allows checking if the bag is empty.
  */
-public class CrystalBag {
+public class CrystalBag implements Serializable {
 
     private ArrayList<Crystal> crystals;
 

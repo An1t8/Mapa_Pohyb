@@ -3,12 +3,14 @@ package commands;
 import game.*;
 import questions.QuestionsControler;
 
+import java.io.Serializable;
+
 /**
  * The commands.FlyCommand class extends command that allows the player to fly to different planets in the universe.
  * The command requires a destination planet and moves the player to that location, interacting with the environment.
  */
 
-public class FlyCommand extends Command {
+public class FlyCommand extends Command implements Serializable {
 
 
     private Location playerLocation;

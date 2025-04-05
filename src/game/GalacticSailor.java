@@ -6,12 +6,16 @@ import commands.Prompter;
 import commands.ShowCrystals;
 import questions.QuestionSession;
 
+import java.io.Serializable;
+
 /**
  * The game.GalacticSailor class represents a player in the game, with various attributes and abilities related to the player's progress.
  * It contains methods for interacting with the environment, including the current location, the crystal bag, and the interaction with the game world (e.g., using the prompter, setting current planet).
  */
 
-public class GalacticSailor {
+public class GalacticSailor implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private CrystalBag crystalBag;
     private BaseStation baseStation;
@@ -38,6 +42,16 @@ public class GalacticSailor {
     }
 
 
+    private boolean gameCompleted; // Stav hry (dokonalá hra nebo ne)
+
+    // Getter a setter pro tento atribut
+    public boolean isGameCompleted() {
+        return gameCompleted;
+    }
+
+    public void setGameCompleted(boolean gameCompleted) {
+        this.gameCompleted = gameCompleted;
+    }
 
     public PlanetGateKeeper getCurrentPGK() {
         return pgk;
@@ -57,9 +71,14 @@ public class GalacticSailor {
      */
     public String usePrompter() {
         if (prompter == null) {
-            return "commands.Prompter is not available.";
+            return "Prompter is not available.";
         }
         return prompter.getHint();
+    }
+
+
+    public BaseStation getBaseStation() {
+        return baseStation;
     }
 
     public QuestionSession getCurrentSession() {

@@ -35,8 +35,9 @@ public class GalacticSailorTest {
         astroKoala = new Astrokoala();
         comet = new Comet(baseStation);
         pgk = new PlanetGateKeeper();
-        bigbang = new BigBang(comet);
         player = new GalacticSailor(crystalBag, baseStation, playerLocation, astroKoala, bigbang, comet, pgk);
+
+        bigbang = new BigBang(comet, player);
     }
 
     /**

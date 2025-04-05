@@ -6,8 +6,7 @@ import questions.Question;
 import questions.QuestionSession;
 import questions.QuestionsControler;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -20,7 +19,7 @@ import java.util.Scanner;
 public class GameConsole {
     private boolean exit = false;
     private HashMap<String, Command> commands = new HashMap<>();
-    public static String commandLogFile = "commands.txt";
+    public static String commandLogFile = "res/commands.txt";
 
     private Scanner scanner = new Scanner(System.in);
     private CrystalBag crystalBag = new CrystalBag();
@@ -39,13 +38,15 @@ public class GameConsole {
     private QuestionsControler questionsControler;
     private ShowCrystals show;
     private RulesCommand rules;
+    private SaveCommand saveCommand;
+    private LoadCommand loadCommand;
 
 
     /**
      * Initializes the game, loads the universe map, and sets up game components.
      */
     public void initialize() {
-        universe.loadMap("map.csv");
+        universe.loadMap("res/map.csv");
 
         Planet startPlanet = universe.getPlanet("Station");
         if (startPlanet == null) {
@@ -57,20 +58,22 @@ public class GameConsole {
         baseStation = new BaseStation(startPlanet);
         comet = new Comet(baseStation);
         rules = new RulesCommand();
-
         astroKoala = new Astrokoala(baseStation, comet);
-        bigBang = new BigBang(comet);
         galacticSailor = new GalacticSailor(crystalBag, baseStation, playerLocation, astroKoala, bigBang, comet, pgk);
+
+        bigBang = new BigBang(comet, galacticSailor);
         prompter = galacticSailor.getPrompter();
         show = new ShowCrystals(galacticSailor, baseStation);
         questionsControler = new QuestionsControler(galacticSailor, crystalBag);
 
         QuestionsControler questionsControler = new QuestionsControler(galacticSailor, crystalBag);
+        saveCommand = new SaveCommand(this);
+        loadCommand = new LoadCommand(this);
 
         commands = new HashMap<>();
         commands.put("fly", new FlyCommand(playerLocation, questionsControler, universe, pgk, baseStation));
         commands.put("talk", new TalkCommand(galacticSailor));
-        commands.put("take", new TakeCrystal(crystalBag, galacticSailor));
+        commands.put("take", new TakeCrystal(crystalBag, galacticSailor, universe));
         commands.put("position", new PositionCrystal(crystalBag, baseStation, galacticSailor));
         commands.put("help", new Help());
         commands.put("leave", new Exit());
@@ -82,6 +85,8 @@ public class GameConsole {
         commands.put("prompter", prompter);
         commands.put("show", show);
         commands.put("cometplan", new CometPlan(comet));
+        commands.put("save", saveCommand);
+        commands.put("load", loadCommand);
     }
 
     /**
@@ -132,6 +137,8 @@ public class GameConsole {
                 - comet             → Show all informations about the comets.
                 - prompter          → Show hints for when you dont know the answer.
                 - cometplan         → Displays comet crystal distribution.
+                - save [filename]     Saves the current state of the game.
+                - load [filename]     Loads the game from the file.
                 """);
         System.out.println("Type a command to begin your adventure!\n");
     }
@@ -201,4 +208,106 @@ public class GameConsole {
             System.out.println("Error resetting command log: " + e.getMessage());
         }
     }
+
+
+    /**
+     * Saves the current game state to a file.
+     * @param filename The name of the file where the game state will be saved.
+     *                 If null or empty, "game.txt" will be used as default.
+     * @return true if the game was saved successfully, false otherwise.
+     */
+    public boolean saveGame(String filename) {
+        if (filename == null || filename.isEmpty()) {
+            filename = "res/game.txt";
+        }
+
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
+
+            GameState gameState = new GameState();
+            gameState.universe = this.universe;
+            gameState.crystalBag = this.crystalBag;
+            gameState.currentPlanetName = this.playerLocation.getCurrentLocation();
+            gameState.baseStation = this.baseStation;
+            gameState.galacticSailor = this.galacticSailor;
+            gameState.questionsControler = this.questionsControler;
+            gameState.comet = this.comet;
+            gameState.gameCompleted = this.galacticSailor.isGameCompleted();  // Uložení stavu dokončení hry
+
+
+            oos.writeObject(gameState);
+            return true;
+        } catch (IOException e) {
+            System.out.println("Error while saving the game: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+    /**
+     * Loads the game state from a file.
+     * @param filename The name of the file from which the game state will be loaded.
+     *                 If null or empty, "res/game.txt" will be used as default.
+     * @return true if the game was loaded successfully, false otherwise.
+     */
+    public boolean loadGame(String filename) {
+        if (filename == null || filename.isEmpty()) {
+            filename = "res/game.txt";
+        }
+
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
+            GameState gameState = (GameState) ois.readObject();
+
+            this.universe = gameState.universe!= null ? gameState.universe : new Universe();
+            this.crystalBag = gameState.crystalBag;
+
+            Planet currentPlanet = this.universe.getPlanet(gameState.currentPlanetName);
+            if (currentPlanet == null) {
+                System.out.println("Planet " + gameState.currentPlanetName + " not found.");
+                return false;
+            }
+            this.playerLocation = new Location(currentPlanet);
+
+            this.baseStation = gameState.baseStation;
+            this.galacticSailor = gameState.galacticSailor;
+            this.galacticSailor.setPlayerLocation(this.playerLocation);
+
+            this.questionsControler = gameState.questionsControler;
+            this.comet = gameState.comet;
+
+            this.universe.getTakenCrystals().clear();
+            this.universe.getTakenCrystals().putAll(gameState.takenCrystals);
+
+            this.astroKoala.setBaseStation(this.baseStation);
+            this.astroKoala.setComet(this.comet);
+            this.bigBang = new BigBang(this.comet, galacticSailor);
+
+            if (gameState.gameCompleted) {
+                System.out.println("🌍 Big Bang has occurred! Congratulations you won the game! The Earth has been created! \nThank you for playing 'The Beginning'! You can now use 'leave' to exit the game.");
+            }
+            updateCommands();
+
+            System.out.println("You are currently on planet: " + this.playerLocation.getCurrentLocation());
+            return true;
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error while loading the game: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private void updateCommands() {
+        commands.put("fly", new FlyCommand(playerLocation, questionsControler, universe, pgk, baseStation));
+        commands.put("talk", new TalkCommand(galacticSailor));
+        commands.put("take", new TakeCrystal(crystalBag, galacticSailor, universe));
+        commands.put("position", new PositionCrystal(crystalBag, baseStation, galacticSailor));
+        commands.put("check", new CheckCrystals(astroKoala, galacticSailor, baseStation, comet));
+        commands.put("bigbang", bigBang);
+        commands.put("comet", comet);
+        commands.put("prompter", prompter);
+        commands.put("show", new ShowCrystals(galacticSailor, baseStation));
+        commands.put("cometplan", new CometPlan(comet));
+    }
+
+
 }

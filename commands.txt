@@ -1,4 +1,0 @@
-fly colverde
-talk
-take
-show

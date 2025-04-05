@@ -1,25 +1,34 @@
 package commands;
 
+import game.GalacticSailor;
+
+import java.io.Serializable;
+
 /**
  * The commands.BigBang class represents the final command that triggers the creation
  * of Earth if both comets are full.
  */
-public class BigBang extends Command {
+public class BigBang extends Command implements Serializable {
 
 
     private Comet comet;
+    private GalacticSailor player;
 
     /**
      * Constructs a commands.BigBang command with the specified comet.
      * @param comet The comet used in the Big Bang event.
+     * @param player The player attempting to trigger the Big Bang.
      * @throws IllegalArgumentException if the comet is null.
-     *
      */
-    public BigBang(Comet comet) {
+    public BigBang(Comet comet, GalacticSailor player) {
         if (comet == null) {
-            throw new IllegalArgumentException("commands.Comet cannot be null!");
+            throw new IllegalArgumentException("Comet cannot be null!");
+        }
+        if (player == null) {
+            throw new IllegalArgumentException("Player cannot be null!");
         }
         this.comet = comet;
+        this.player = player;
 
     }
 
@@ -29,7 +38,14 @@ public class BigBang extends Command {
      */
     @Override
     public String execute() {
+        if(!player.isAtBaseStation()){
+            return "you can only use this command while on base station!";
+        }
         if (comet.areBothCometsFull()) {
+            player.getCrystalBag().getCrystals().clear(); // Vyprázdní batoh
+            player.getBaseStation().getPlacedCrystals().clear(); // Vyprázdní základnu
+            player.setGameCompleted(true); // Nastaví stav hry jako dokončený
+
             return "🌍 Big Bang has occurred! Congratulations you won the game the Earth has been created! \n Thank you for playing 'The Beginning'! You can now use 'leave' to exit the game.";
         }
         return "Both comets are not full yet. Add more crystals to each comet.";

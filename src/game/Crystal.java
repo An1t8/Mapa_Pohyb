@@ -1,9 +1,11 @@
 package game;
 
+import java.io.Serializable;
+
 /**
  * The game.Crystal class represents a crystal with a name.
  */
-public class Crystal {
+public class Crystal implements Serializable {
 
     private String name;
 

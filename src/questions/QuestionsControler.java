@@ -7,13 +7,14 @@ import game.PlanetGateKeeper;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * The questions.QuestionsControler class manages planet gatekeepers and their questions.
  * It loads questions from a file and assigns them to the corresponding planets.
  */
-public class QuestionsControler {
+public class QuestionsControler implements Serializable {
 
     private GalacticSailor galacticSailor;
     private Map<String, PlanetGateKeeper> planetKeepers;
@@ -23,7 +24,7 @@ public class QuestionsControler {
         this.galacticSailor = galacticSailor;
         this.crystalBag = crystalBag;
         this.planetKeepers = new HashMap<>();
-        loadQuestionsFromFile("questions.txt");
+        loadQuestionsFromFile("res/questions.txt");
     }
 
     /**

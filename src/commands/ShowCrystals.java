@@ -5,20 +5,21 @@ import game.Crystal;
 import game.CrystalBag;
 import game.GalacticSailor;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * A command that displays the crystals the player currently holds in their bag
  * and, if at the base station, the crystals placed there.
  */
-public class ShowCrystals extends Command {
+public class ShowCrystals extends Command  {
 
     private GalacticSailor player;
     private BaseStation baseStation;
 
 
     /**
-     * Constructs the commands.ShowCrystals command with the given player and base station.
+     * ShowCrystals command with the given player and base station.
      * @param player      The player whose crystals will be displayed.
      * @param baseStation The base station where placed crystals are stored.
      */
