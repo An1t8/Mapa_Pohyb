@@ -14,7 +14,6 @@ import java.util.HashMap;
 public class TakeCrystal extends Command implements Serializable {
     private CrystalBag crystalBag;
     private GalacticSailor player;
-    private BaseStation baseStation;
     private Universe universe;
     private HashMap<String, Boolean> takenCrystals;
 
@@ -32,16 +31,6 @@ public class TakeCrystal extends Command implements Serializable {
 
     }
 
-
-    /*public boolean isCrystalTaken(String crystalName) {
-        return takenCrystals.getOrDefault(crystalName, false);
-    }
-
-    public void markCrystalAsTaken(String crystalName) {
-        takenCrystals.put(crystalName, true);
-    }
-
-     */
 
     /**
      * Executes the command to allow the player to take a crystal from the PGK if the player has completed the necessary conditions.
@@ -61,16 +50,6 @@ public class TakeCrystal extends Command implements Serializable {
                 return "You must correctly answer all the Planet Gate Keeper's questions before taking a crystal.";
             }
 
-            /*if (pgk.canTakeCrystal()) {
-                Crystal crystal = pgk.allowCrystalTake();
-                if (crystal != null) {
-                    crystalBag.addCrystal(crystal);
-                    return "You have collected a " + crystal.getName();
-
-                }
-            }
-
-             */
             if (pgk.canTakeCrystal()) {
                 Crystal crystal = pgk.allowCrystalTake();
 
@@ -87,7 +66,7 @@ public class TakeCrystal extends Command implements Serializable {
                     }
 
                     crystalBag.addCrystal(crystal);
-                    universe.markCrystalAsTaken(crystal.getName());
+                    universe.crystalTaken(crystal.getName());
 
                     return "You have collected a " + crystal.getName();
                 }

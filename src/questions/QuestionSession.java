@@ -23,7 +23,7 @@ public class QuestionSession implements Serializable {
 
     /**
      * Constructs a questions.QuestionSession for a given game.PlanetGateKeeper.
-     * @param pgk The game.PlanetGateKeeper managing the questions.
+     * @param pgk The PlanetGateKeeper managing the questions.
      */
     public QuestionSession(PlanetGateKeeper pgk, GalacticSailor galacticSailor) {
         this.questions = pgk.getQuestions();
@@ -44,7 +44,7 @@ public class QuestionSession implements Serializable {
 
     /**
      * Retrieves the current question the player needs to answer.
-     * @return The current questions.Question, or null if no more questions are available.
+     * @return The current Question, or null if no more questions are available.
      */
     public Question getCurrentQuestion() {
         if (currentQuestionIndex < pgk.getQuestions().size()) {

@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.*;
 
 /**
- * The questions.QuestionsControler class manages planet gatekeepers and their questions.
+ * The QuestionsControler class manages planet gatekeepers and their questions.
  * It loads questions from a file and assigns them to the corresponding planets.
  */
 public class QuestionsControler implements Serializable {
@@ -67,12 +67,11 @@ public class QuestionsControler implements Serializable {
             }
         } catch (IOException e) {
             System.out.println("Error reading questions: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 
     /**
-     * Retrieves the game.PlanetGateKeeper for a given planet.
+     * Retrieves the PlanetGateKeeper for a given planet.
      * @param planetName The name of the planet.
      * @return The game.PlanetGateKeeper if found, otherwise null.
      */
@@ -82,7 +81,7 @@ public class QuestionsControler implements Serializable {
 
 
     /**
-     * Allows the game.GalacticSailor to visit a planet and interact with its gatekeeper.
+     * Allows the GalacticSailor to visit a planet and interact with its gatekeeper.
      * @param planetName The name of the planet to visit.
      */
     public void visitPlanet(String planetName) {

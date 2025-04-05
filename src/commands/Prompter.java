@@ -50,7 +50,6 @@ public class Prompter extends Command  implements Serializable {
             return "No questions available at the moment.";
         }
 
-        String questionText = currentQuestion.getQuestionText();
         String correctAnswer = currentQuestion.getCorrectAnswer();
 
         StringBuilder hints = new StringBuilder("Hints for the current question:\n");

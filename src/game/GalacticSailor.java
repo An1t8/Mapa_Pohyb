@@ -5,13 +5,11 @@ import commands.Comet;
 import commands.Prompter;
 import commands.ShowCrystals;
 import questions.QuestionSession;
-
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
+
 
 /**
- * The game.GalacticSailor class represents a player in the game, with various attributes and abilities related to the player's progress.
+ * The GalacticSailor class represents a player in the game, with various attributes and abilities related to the player's progress.
  * It contains methods for interacting with the environment, including the current location, the crystal bag, and the interaction with the game world (e.g., using the prompter, setting current planet).
  */
 
@@ -28,8 +26,7 @@ public class GalacticSailor implements Serializable {
     private PlanetGateKeeper pgk;
     private QuestionSession currentSession;
     private Prompter prompter;
-    private ShowCrystals showCrystals;
-    private Planet planet;
+
 
 
 public GalacticSailor(CrystalBag crystalBag, BaseStation baseStation, Location playerLocation, Astrokoala astroKoala, BigBang bigBang, Comet comet, PlanetGateKeeper pgk) {

@@ -2,13 +2,10 @@ package main;
 
 import commands.*;
 import game.*;
-import questions.Question;
 import questions.QuestionSession;
 import questions.QuestionsControler;
-
 import java.io.*;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 
 
@@ -94,12 +91,13 @@ public class GameConsole {
      */
     private void showIntro() {
         System.out.println("\nWelcome to the Space Adventure Game called The Beginning! 🚀");
+        System.out.println("\n Your name: Galactic Sailor \n Astrokoala: your friend and helper! Astrokoala gives you random hints on the game and also checks whether your comets are ready for the Big bang!");
         System.out.println("\n--------------- .\uD81A\uDD54 \uD83E\uDE90˖ Game Rules - The Beginning: .\uD81A\uDD54 \uD83E\uDE90˖ --------------------------\n" +
                 "\nTravel between planets using the command 'fly [planet name]'.\n" +
                 "Answer the gatekeepers questions correctly to collect a crystal. If you dont know the answer try using 'prompter'.\n" +
                 "Bring the crystals to the base station and place them using 'position'.\n" +
                 "Arrange two stacks of 5 crystals correctly.\n" +
-                "You can always use 'cometPlan' to see your crystals arrangement in your comets!\n"+
+                "You can always use 'cometplan' to see your crystals arrangement in your comets!\n"+
                 "Use 'comet' and then type in the the name of the crystal to add crystal to the comet.\n" +
                 "Activate 'bigbang' and witness the Big Bang!\n" +
                 "You can always use 'help' to see available commands and planets you can travel to.");
@@ -124,17 +122,17 @@ public class GameConsole {
         System.out.println("""
                 - fly [planet]      → Travel to a new planet.
                 - talk              → Interact with someone on the planet.
-                - take              → Collect a crystal from the environment.
+                - take              → Collect a crystal from the Planet.
                 - position          → Place a collected crystal at the base station.
                 - hint              → Astrokoala gives you a random hint of the game.
                 - check             → Astrokoala checks if the crystals are placed correctly plus displays are at the BaseStation.
-                                      You can use this ONLY when youre at the base station since Astrokoala doesnt travel with you.
+                                      You can use this when you are at the base station ONLY since Astrokoala doesnt travel with you.
                 - rules             → Display game rules. Use this whenever you feel lost!
                 - show              → Displays the crystals in your crystal bag and at the base station. You can use this whenever you want.
                 - help              → Show available commands and planets.
                 - leave             → Exit the game.
                 - bigbang           → Trigger the Big Bang event when two comets are ready.
-                - comet             → Show all informations about the comets.
+                - comet             → Show all information about the comets.
                 - prompter          → Show hints for when you dont know the answer.
                 - cometplan         → Displays comet crystal distribution.
                 - save              → Saves the current state of the game to the file 'game.txt'.
@@ -234,16 +232,14 @@ public class GameConsole {
             gameState.questionsControler = this.questionsControler;
             gameState.comet = this.comet;
             gameState.gameCompleted = this.galacticSailor.isGameCompleted();
-            gameState.takenCrystals = this.universe.getTakenCrystals(); // Save taken crystals
-            gameState.planets = this.universe.planets; // Save planets
-            gameState.currentPlanetName = this.galacticSailor.getCurrentPlanetName(); // Save current planet name
+            gameState.takenCrystals = this.universe.getTakenCrystals();
+            gameState.planets = this.universe.planets;
+            gameState.currentPlanetName = this.galacticSailor.getCurrentPlanetName();
             gameState.astrokoala = this.astroKoala;
-
             oos.writeObject(gameState);
             return true;
         } catch (IOException e) {
             System.out.println("Error while saving the game: " + e.getMessage());
-            e.printStackTrace();
             return false;
         }
     }
@@ -259,7 +255,6 @@ public class GameConsole {
         if (filename == null || filename.isEmpty()) {
             filename = "res/game.txt";
         }
-
 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
             GameState gameState = (GameState) ois.readObject();
@@ -293,7 +288,6 @@ public class GameConsole {
             return true;
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Error while loading the game: " + e.getMessage());
-            e.printStackTrace();
             return false;
         }
     }

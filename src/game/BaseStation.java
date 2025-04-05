@@ -35,7 +35,7 @@ public class BaseStation implements Serializable {
      * Displays a message with instructions on how to use the base station.
      */
     public void text() {
-        System.out.println("\nYou are now on Station. Use 'position' to place all crystals from your Crystalbag on the base station. \nYour friend, game.Astrokoala is here, when you think your comets are ready use 'check' and game.Astrokoala will check if you have all the crystals!");
+        System.out.println("\nYou are now on Station. Use 'position' to place all crystals from your Crystalbag on the base station. \nYour friend, Astrokoala is here, when you think your comets are ready use 'check' and gAstrokoala will check if you have all the crystals!");
     }
 
     /**

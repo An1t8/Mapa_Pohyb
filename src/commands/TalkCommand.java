@@ -60,7 +60,7 @@ public class TalkCommand extends Command implements Serializable {
                 return "No more questions available.";
             }
 
-            System.out.println("questions.Question: " + currentQuestion.getQuestionText());
+            System.out.println("Question: " + currentQuestion.getQuestionText());
 
             while (true) {
                 System.out.print("Your answer (or type 'prompter' for a hint): ");

@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 public class Comet extends Command implements Serializable {
 
-    private static final int REQUIRED_CRYSTALS = 1;
+    private static final int REQUIRED_CRYSTALS = 5;
     private List<Crystal> comet1;
     private List<Crystal> comet2;
     private BaseStation baseStation;
@@ -111,7 +111,7 @@ public class Comet extends Command implements Serializable {
     @Override
     public String execute() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter crystal name - [planet name] + 'crystal':  ");
+        System.out.print("Enter crystal name: [planet name] + 'crystal':  ");
         return addCrystal(scanner.nextLine());
     }
 

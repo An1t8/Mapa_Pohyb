@@ -21,8 +21,6 @@ public class Universe implements Serializable {
 
     }
 
-
-
     /**
      * Loads planet data from a file and sets up the planets and their connections.
      * @param filename The name of the file to read planet data from.
@@ -66,14 +64,28 @@ public class Universe implements Serializable {
         return planet;
     }
 
+    /**
+     * Gets the map of taken crystals.
+     * @return a map where keys are crystal names and values indicate whether they are taken
+     */
     public HashMap<String, Boolean> getTakenCrystals() {
         return takenCrystals;
     }
 
-    public void markCrystalAsTaken(String crystalName) {
+    /**
+     * Marks a crystal as taken in the universe.
+     * This prevents the same crystal from being collected again.
+     * @param crystalName the name of the crystal
+     */
+    public void crystalTaken(String crystalName) {
         takenCrystals.put(crystalName, true);
     }
 
+    /**
+     * Checks whether a crystal has already been taken.
+     * @param crystalName the name of the crystal
+     * @return {@code true} if the crystal has been taken; {@code false} otherwise
+     */
     public boolean isCrystalTaken(String crystalName) {
         return takenCrystals.getOrDefault(crystalName, false);
     }

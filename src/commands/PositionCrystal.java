@@ -42,7 +42,7 @@ public class PositionCrystal extends Command implements Serializable {
 
         }
 
-        return "All your crystals have been placed at the base station.";
+        return "All your crystals have been placed at the base station. \n Use 'comet' to start adding crystals to your comets";
 
     }
 

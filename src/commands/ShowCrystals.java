@@ -9,8 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * A command that displays the crystals the player currently holds in their bag
- * and, if at the base station, the crystals placed there.
+ * A command that displays the crystals the player currently holds in their bag and, if at the base station, the crystals placed there.
  */
 public class ShowCrystals extends Command  {
 
@@ -35,34 +34,35 @@ public class ShowCrystals extends Command  {
      */
     @Override
     public String execute() {
-        StringBuilder result = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
 
         CrystalBag bag = player.getCrystalBag();
         if (bag.isEmpty()) {
-            result.append(" Your crystal bag is empty.\n");
+            sb.append(" Your crystal bag is empty.\n");
         } else {
-            result.append("You have the following crystals in your bag:\n");
+            sb.append("You have the following crystals in your bag:\n");
             for (Crystal c : bag.getCrystals()) {
-                result.append("- ").append(c.getName()).append("\n");
+                sb.append("- ").append(c.getName()).append("\n");
             }
         }
 
         if (player.getLocation().getCurrentLocation().equalsIgnoreCase("Station")) {
             List<Crystal> placedCrystals = baseStation.getPlacedCrystals();
             if (placedCrystals.isEmpty()) {
-                result.append("\n No crystals have been placed at the base station yet.");
+                sb.append("\n No crystals placed at the base station.");
             } else {
-                result.append("\n Crystals placed at the base station:\n");
+                sb.append("\n Crystals placed at the base station:\n");
                 for (Crystal c : placedCrystals) {
-                    result.append("- ").append(c.getName()).append("\n");
+                    sb.append("- ").append(c.getName()).append("\n");
                 }
+                sb.append("\nUse 'comet' to start adding crystals to the comets!");
             }
 
         } else {
-            result.append("\n You are not at the base station, so you can only see your crystal bag.");
+            sb.append("\n You are not at the base station, so you can only see your crystal bag.");
         }
 
-        return result.toString();
+        return sb.toString();
     }
 
     /**

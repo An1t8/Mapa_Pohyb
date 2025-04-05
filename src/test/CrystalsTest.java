@@ -70,8 +70,19 @@ public class CrystalsTest {
         System.out.println("Is player at base station? " + isAtBaseStation);
         assertTrue(isAtBaseStation, "Player should be at the Base Station");
 
-        baseStation.getPlacedCrystals().add(new game.Crystal("Rosetta"));
+        baseStation.getPlacedCrystals().add(new Crystal("Rosetta"));
         baseStation.getPlacedCrystals().add(new Crystal("Lavatron"));
+        baseStation.getPlacedCrystals().add(new Crystal("Rosetta"));
+        baseStation.getPlacedCrystals().add(new Crystal("Rosetta"));
+        baseStation.getPlacedCrystals().add(new Crystal("Rosetta"));
+        baseStation.getPlacedCrystals().add(new Crystal("Rosetta"));
+        baseStation.getPlacedCrystals().add(new Crystal("Rosetta"));
+        baseStation.getPlacedCrystals().add(new Crystal("Lavatron"));
+        baseStation.getPlacedCrystals().add(new Crystal("Lavatron"));
+        baseStation.getPlacedCrystals().add(new Crystal("Lavatron"));
+
+
+
 
         System.out.println("Adding first crystal: Rosetta");
         comet.addCrystal("Rosetta");
@@ -82,8 +93,21 @@ public class CrystalsTest {
         System.out.println("Adding second crystal: Lavatron");
         comet.addCrystal("Lavatron");
         System.out.println("Are both comets full after second crystal? " + comet.areBothCometsFull());
+        comet.addCrystal("Lavatron");
+        comet.addCrystal("Lavatron");
+        comet.addCrystal("Lavatron");
+        comet.addCrystal("Rosetta");
 
-        Assertions.assertTrue(comet.areBothCometsFull(), "Comets should be full after adding two crystals");
+        comet.addCrystal("Rosetta");
+        comet.addCrystal("Rosetta");
+        comet.addCrystal("Rosetta");
+        comet.addCrystal("Rosetta");
+        comet.addCrystal("Rosetta");
+        System.out.println("Are both comets full after tenth crystal? " + comet.areBothCometsFull());
+
+
+
+        Assertions.assertTrue(comet.areBothCometsFull(), "Comets should be full after adding 10 crystals");
 
         String result = checkCrystals.execute();
         System.out.println("Command result: " + result);

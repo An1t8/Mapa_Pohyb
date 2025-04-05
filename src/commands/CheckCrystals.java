@@ -17,7 +17,7 @@ public class CheckCrystals extends Command implements Serializable {
     private GalacticSailor player;
     private BaseStation station;
     private Comet comet;
-    private static final int REQUIRED_CRYSTALS = 1;
+    private static final int REQUIRED_CRYSTALS = 5;
 
 
 

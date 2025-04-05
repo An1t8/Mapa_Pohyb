@@ -42,9 +42,9 @@ public class BigBang extends Command implements Serializable {
             return "you can only use this command while on base station!";
         }
         if (comet.areBothCometsFull()) {
-            player.getCrystalBag().getCrystals().clear(); // Vyprázdní batoh
-            player.getBaseStation().getPlacedCrystals().clear(); // Vyprázdní základnu
-            player.setGameCompleted(true); // Nastaví stav hry jako dokončený
+            player.getCrystalBag().getCrystals().clear();
+            player.getBaseStation().getPlacedCrystals().clear();
+            player.setGameCompleted(true);
 
             return "🌍 Big Bang has occurred! Congratulations you won the game the Earth has been created! \n Thank you for playing 'The Beginning'! You can now use 'leave' to exit the game.";
         }

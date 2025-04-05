@@ -21,7 +21,7 @@ public class Help extends Command implements Serializable {
         System.out.println("""
                 - fly [planet]      → Travel to a new planet.
                 - talk              → Interact with someone on the planet.
-                - take              → Collect a crystal from the environment.
+                - take              → Collect a crystal from the planet.
                 - position          → Place a all collected crystals at the base station.
                 - hint              → Astrokoala gives you a random hint of the game.
                 - check             → Astrokoala checks if the crystals are placed correctly plus displays are at the BaseStation.
@@ -33,6 +33,8 @@ public class Help extends Command implements Serializable {
                 - bigbang           → Trigger the Big Bang event when two comets are ready.
                 - comet             → Show all informations about the comets.
                 - cometplan         → Displays comet crystal distribution.
+                - save              → Saves the current state of the game to the file 'game.txt'.
+                - load              → Loads the game from the file: 'game.txt'.
                 """);
 
         System.out.println("\n\uD83C\uDF0D Available Planets:");
