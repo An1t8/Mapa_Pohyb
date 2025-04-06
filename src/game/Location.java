@@ -37,19 +37,15 @@ public class Location implements Serializable {
         if (destination == null || destination.isEmpty()) {
             return false;
         }
-
         String formattedDestination = destination.toLowerCase();
         if (formattedDestination.equals(currentPlanet.name.toLowerCase())) {
-
             return true;
         }
-
         if (currentPlanet.connections.containsKey(formattedDestination)) {
             currentPlanet = currentPlanet.connections.get(formattedDestination);
             return true;
 
         } else {
-
             return false;
         }
     }

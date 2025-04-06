@@ -1,0 +1,20 @@
+load
+cometplan
+help
+fly mysterra
+talk
+take
+fly luminara
+talk
+take
+help
+rules
+show
+fly station
+position
+comet
+show
+cometplan
+check
+bigbang
+leave

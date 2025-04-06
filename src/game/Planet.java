@@ -32,8 +32,8 @@ public class Planet implements Serializable {
      * @param targetPlanet The planet to connect to.
      */
     public void connect(String planetName, Planet targetPlanet) {
-        connections.put(planetName.toLowerCase(), targetPlanet); // Store with lowercase planet names
-        targetPlanet.connections.put(this.name.toLowerCase(), this); // Ensure the connection is bidirectional
+        connections.put(planetName.toLowerCase(), targetPlanet);
+        targetPlanet.connections.put(this.name.toLowerCase(), this);
     }
 
 

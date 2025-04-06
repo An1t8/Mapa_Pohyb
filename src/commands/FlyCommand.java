@@ -52,9 +52,6 @@ public class FlyCommand extends Command implements Serializable {
         }
 
         String destinationName = destination.trim();
-
-
-
         if (destination.equalsIgnoreCase(playerLocation.getCurrentLocation())) {
             System.out.println("You are already on a " + playerLocation.getCurrentLocation() + ".");
         } else {
